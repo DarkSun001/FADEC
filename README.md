@@ -23,7 +23,9 @@ Prise de rendez-vous simplifiée.
 
 ## Utilisation
 Installation : Expliquez comment installer le projet sur une machine locale ou un serveur.
+
 Configuration : Indiquez comment configurer les paramètres de base.
+
 Exécution : Montrez comment exécuter l'application ou le service.
 
 # Exemple de code pour calculer un devis
