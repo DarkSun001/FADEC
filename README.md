@@ -34,7 +34,7 @@ PERROUAS THIBAULT
 
 Christopher MBARAPA-SOKAMBI
 
-
+Georges Jonathan NGUEKOUMOU
 
 ## Licence
 Indiquez la licence sous laquelle le projet est distribué.
