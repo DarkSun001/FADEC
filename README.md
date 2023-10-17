@@ -28,11 +28,10 @@ Configuration : Indiquez comment configurer les paramètres de base.
 
 Exécution : Montrez comment exécuter l'application ou le service.
 
-# Exemple de code pour calculer un devis
-def calcul_devis(prix_unitaire, quantite):
-    return prix_unitaire * quantite
+
 ## Liste des personnes ayant contribué au projet.
 PERROUAS THIBAULT
+
 Christopher MBARAPA-SOKAMBI
 
 
