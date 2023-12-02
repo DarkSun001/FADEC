@@ -1,0 +1,42 @@
+/* Styles pour les éléments de formulaire */
+
+input[type="text"],
+input[type="password"],
+input[type="number"],
+textarea,
+select {
+  padding: rem(10);
+  border-radius: var(--main-radius);
+  border: 1px solid var(--grey);
+  font-size: rem(16);
+  line-height: rem(20);
+  color: var(--text-color);
+  transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="number"]:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--blue);
+}
+
+/* Style pour les boutons de formulaire */
+input[type="submit"],
+button[type="submit"] {
+  padding: rem(10) rem(20);
+  border-radius: var(--main-radius);
+  border: none;
+  background-color: var(--blue);
+  color: var(--white);
+  cursor: pointer;
+  font-size: rem(16);
+  transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover,
+button[type="submit"]:hover {
+  background-color: var(--blue-darker);
+}

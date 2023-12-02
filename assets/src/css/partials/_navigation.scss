@@ -1,0 +1,30 @@
+// _navigation.scss
+
+// Styles de base pour les éléments de navigation
+nav {
+    // Styles par défaut pour la navigation
+  }
+  
+  // Styles pour les liens de navigation
+  nav a {
+    color: var(--text-color);
+    text-decoration: none;
+    transition: color var(--transition-duration);
+  
+    &:hover {
+      color: var(--link-hover-color);
+    }
+  }
+  
+  // Styles pour la barre de navigation (si vous utilisez une barre de navigation)
+  .navbar {
+    // Styles pour la barre de navigation
+  }
+  
+  // Styles pour les éléments du menu (si vous utilisez un menu déroulant)
+  .menu-item {
+    // Styles pour les éléments du menu
+  }
+  
+  // Ajoutez d'autres styles spécifiques pour la navigation au besoin
+  

@@ -1,0 +1,38 @@
+// _forms.scss
+
+// Styles pour les états de validation des formulaires
+
+// Styles par défaut pour les champs de formulaire
+input, textarea, select {
+    // Styles par défaut ici
+  }
+  
+  // Styles pour l'état "valide"
+  .is-valid {
+    border: 2px solid var(--valid-color);
+  }
+  
+  // Styles pour l'état "invalide"
+  .is-invalid {
+    border: 2px solid var(--invalid-color);
+  }
+  
+  // Styles pour l'état "non-validé" (état initial)
+  .is-not-validated {
+    // Styles par défaut pour les champs non validés
+  }
+  
+  // Ajoutez d'autres classes d'état de validation au besoin
+// _form-specific.scss
+
+// Exemple d'application des classes d'état de validation
+.form-submitted {
+    input.is-valid {
+      @extend .is-valid;
+    }
+  
+    input.is-invalid {
+      @extend .is-invalid;
+    }
+  }
+    

@@ -1,0 +1,29 @@
+// _icons.scss
+
+// Styles généraux pour les icônes
+.icon {
+    display: inline-block;
+    font-size: 1.5rem; // Taille par défaut des icônes
+    vertical-align: middle; // Ajustez l'alignement vertical selon vos besoins
+  }
+  
+  // Icône de bâtiment
+  .icon-building {
+    @extend .icon; // Utilisez le style général des icônes
+    position: relative;
+    width: 1em; // Largeur de l'icône (ajustez selon vos besoins)
+    height: 1.5em; // Hauteur de l'icône (ajustez selon vos besoins)
+    background-color: #3498db; // Couleur de fond de l'icône
+    border-radius: 0.2em; // Bord arrondi de l'icône
+    margin-right: 0.5em; // Marge à droite de l'icône (ajustez selon vos besoins)
+  }
+  
+  // Pour ajouter une couleur ou une ombre à l'icône, vous pouvez étendre la classe
+  .icon-building.blue {
+    background-color: #3498db;
+  }
+  
+  .icon-building.shadow {
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  }
+  

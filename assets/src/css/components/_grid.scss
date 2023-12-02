@@ -1,0 +1,21 @@
+$gutter: rem(30);
+$cols: 12;
+
+
+
+@for $i from 1 through $cols {
+	.col-#{$i} {
+		padding: 0 calc($gutter / 2);
+		width: calc(100% / $cols * $i);
+	}
+}
+
+
+
+
+.row {
+	display: flex;
+	flex-wrap: wrap;
+	margin: 0 calc($gutter / -2);
+}
+

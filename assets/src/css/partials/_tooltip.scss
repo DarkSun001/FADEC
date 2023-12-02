@@ -1,0 +1,31 @@
+// _tooltip.scss
+
+// Styles pour les info-bulles
+.tooltip {
+    position: relative;
+    display: inline-block;
+  
+    // Styles du texte d'info-bulle
+    .tooltip-text {
+      visibility: hidden;
+      width: 160px;
+      background-color: #3498db; // Couleur de fond de l'info-bulle
+      color: #ffffff; // Couleur du texte de l'info-bulle
+      text-align: center;
+      border-radius: 4px;
+      padding: 8px;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%; // Position de l'info-bulle par rapport à l'élément parent
+      left: 50%;
+      margin-left: -80px; // Ajustez en fonction de la largeur de l'info-bulle
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+  
+    &:hover .tooltip-text {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+  

@@ -1,0 +1,27 @@
+// _typography.scss
+
+// Mixin pour définir la famille de police
+@mixin font-family($family) {
+    font-family: $family, sans-serif;
+  }
+  
+  // Mixin pour définir la taille du texte
+  @mixin font-size($size) {
+    font-size: $size;
+  }
+  
+  // Mixin pour définir l'espacement des lignes
+  @mixin line-height($height) {
+    line-height: $height;
+  }
+  
+  // Mixin pour définir le poids de la police
+  @mixin font-weight($weight) {
+    font-weight: $weight;
+  }
+  
+  // Mixin pour définir la couleur du texte
+  @mixin text-color($color) {
+    color: $color;
+  }
+  

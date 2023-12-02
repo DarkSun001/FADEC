@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Design guide</title>
+	<meta charset="utf-8" />
+	<link rel="stylesheet" type="text/css" href="dist/main.css" />
+	<style>
+		body>section {
+			margin-bottom: 5rem;
+		}
+
+		body>section>section {
+			display: flex;
+			align-items: center;
+			gap: 1rem;
+			margin-bottom: 1rem;
+		}
+
+		.content {
+			height: 2rem;
+			background-color: green;
+		}
+
+		.row {
+			margin-bottom: 1rem;
+		}
+
+		section {
+			border-top: 1px solid #000;
+		}
+	</style>
+</head>
+
+<body>
+	<script src="./src/js/main.js" type="module"></script>
+	<section>
+		<h1>.button</h1>
+		<hr />
+		<section>
+			<a href="#" class="button button-primary button-lg">Button</a>
+			<a href="#" class="button button-primary">Button</a>
+			<a href="#" class="button button-primary button-sm">Button</a>
+		</section>
+		<section>
+			<button class="button button-secondary button-lg">Button</button>
+			<button href="#" class="button button-secondary">Button</button>
+			<button href="#" class="button button-secondary button-sm">
+				Button
+			</button>
+		</section>
+		<section>
+			<button class="button button-danger button-lg">Button</button>
+			<button href="#" class="button button-danger">Button</button>
+			<button href="#" class="button button-danger button-sm">Button</button>
+		</section>
+	</section>
+	<section>
+		<h1>.banner</h1>
+		<hr />
+		<div class="banner" style="background-image: url('assets/images/fond.jpg')"></div>
+		<br />
+		<div class="banner banner-text" style="background-image: url('assets/images/fond.jpg')">
+			<p>
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras
+				ullamcorper nulla a ipsum imperdiet, ac porttitor dui sagittis.
+			</p>
+		</div>
+	</section>
+	<section>
+		<h1>.card</h1>
+		<hr />
+		<article class="card">
+			<img src="assets/images/grue.jpg" />
+			<h1>Card title</h1>
+			<p>
+				Some quick example text to build on the card title and make up the
+				bulk of the card's content.
+			</p>
+			<a href="#" class="button button-primary button-sm">Button</a>
+		</article>
+
+		<article class="card card-full">
+			<img src="assets/images/grue.jpg" />
+			<h1>Card title</h1>
+			<p>
+				Some quick example text to build on the card title and make up the
+				bulk of the card's content.
+			</p>
+			<a href="#" class="button button-primary button-sm">Button</a>
+		</article>
+	</section>
+	<section>
+		<h1>.grid</h1>
+		<hr />
+		<div class="grid">
+			<div class="row">
+				<div class="col-2">
+					<div class="content"></div>
+				</div>
+				<div class="col-2">
+					<div class="content"></div>
+				</div>
+				<div class="col-8">
+					<div class="content"></div>
+				</div>
+
+			</div>
+		</div>
+	</section>
+	<section>
+		<h1>.navbar</h1>
+		<nav class="navbar">
+			<div class="container">
+				<a href="#" class="navbar-brand">Logo</a>
+				<ul class="navbar-nav">
+					<li><a href="#">Accueil</a></li>
+					<li><a href="#">Services</a></li>
+					<li><a href="#">À propos</a></li>
+					<li><a href="#">Contact</a></li>
+				</ul>
+			</div>
+		</nav>
+
+	</section>
+	<section>
+		<footer class="footer">
+			<div class="container">
+				<div class="footer-content">
+					<div class="footer-section about">
+						<h2>À Propos</h2>
+						<p>Ce footer est juste un exemple pour illustrer.</p>
+						<div class="contact">
+							<span><i class="fas fa-phone"></i> 123-456-789</span>
+							<span><i class="fas fa-envelope"></i> info@example.com</span>
+						</div>
+						<div class="socials">
+							<a href="#"><i class="fab fa-facebook"></i></a>
+							<a href="#"><i class="fab fa-twitter"></i></a>
+							<a href="#"><i class="fab fa-instagram"></i></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+	</section>
+	<section>
+		<h1>Formulaire de Contact</h1>
+		<form>
+			<div class="form-group">
+				<label for="name">Nom :</label>
+				<input type="text" id="name" name="name" placeholder="Votre nom" required>
+			</div>
+			<div class="form-group">
+				<label for="email">Email :</label>
+				<input type="email" id="email" name="email" placeholder="Votre email" required>
+			</div>
+			<div class="form-group">
+				<label for="message">Message :</label>
+				<textarea id="message" name="message" placeholder="Votre message" required></textarea>
+			</div>
+			<div class="form-group">
+				<button type="submit" class="button button-primary">Envoyer</button>
+			</div>
+		</form>
+	</section>
+	<section>
+		<button id="openModal">Open Modal</button>
+
+		<!-- The Modal -->
+		<div id="myModal" class="modal">
+			<!-- Modal content -->
+			<div class="modal-content">
+				<span class="close">&times;</span>
+				<h2>Modal Title</h2>
+				<p>Modal content goes here.</p>
+
+			</div>
+		</div>
+	</section>
+	<section>
+
+		<div class="tabs">
+			<button class="tablinks" onclick="openTab(event, 'Tab1')">Tab 1</button>
+			<button class="tablinks" onclick="openTab(event, 'Tab2')">Tab 2</button>
+
+			<div class="tabcontent" id="Tab1">
+				<h3>Contenu de l'onglet 1</h3>
+				<p>Ceci est le contenu de l'onglet 1.</p>
+			</div>
+
+			<div class="tabcontent" id="Tab2">
+				<h3>Contenu de l'onglet 2</h3>
+				<p>Ceci est le contenu de l'onglet 2.</p>
+
+			</div>
+		</div>
+		<script>
+
+			function openTab(evt, tabName) {
+				var i, tabcontent, tablinks;
+				tabcontent = document.getElementsByClassName("tabcontent");
+				for (i = 0; i < tabcontent.length; i++) {
+					tabcontent[i].style.display = "none";
+				}
+				tablinks = document.getElementsByClassName("tablinks");
+				for (i = 0; i < tablinks.length; i++) {
+					tablinks[i].className = tablinks[i].className.replace(" active", "");
+				}
+				document.getElementById(tabName).style.display = "block";
+				evt.currentTarget.className += " active";
+			}
+
+		</script>
+
+
+	</section>
+	<br><br><br>
+	<section>
+		<h1>Dropdown</h1>
+		<div class="dropdown">
+			<button class="dropdown-trigger">Options</button>
+			<ul class="dropdown-list">
+				<li class="dropdown-item">Option 1</li>
+				<li class="dropdown-item">Option 2</li>
+				<li class="dropdown-item">Option 3</li>
+			</ul>
+		</div>
+
+	</section>
+	<section>
+		<h1>Alert</h1>
+		<!-- Exemple d'utilisation d'une alerte de succès -->
+		<div class="alert alert-success" role="alert">
+			C'est un message d'alerte de succès!
+		</div>
+
+		<!-- Exemple d'utilisation d'une alerte d'information -->
+		<div class="alert alert-info" role="alert">
+			C'est un message d'alerte d'information!
+		</div>
+
+		<!-- Exemple d'utilisation d'une alerte d'avertissement -->
+		<div class="alert alert-warning" role="alert">
+			C'est un message d'alerte d'avertissement!
+		</div>
+
+		<!-- Exemple d'utilisation d'une alerte d'erreur -->
+		<div class="alert alert-danger" role="alert">
+			C'est un message d'alerte d'erreur!
+		</div>
+
+	</section>
+	<section>
+		<h1>Typographie</h1>
+		<!-- Exemple d'utilisation des mixins de typographie -->
+		<p class="my-paragraph">
+			Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+			<span class="emphasized-text">Phasellus</span> eget nunc vel justo maximus tincidunt.
+		</p>
+
+	</section>
+	<section>
+		<h1>Animations</h1>
+	</section>
+	<section>
+		<h1>Utilities</h1>
+
+		<div class="mb-3">
+			<p>Ceci est un paragraphe avec une marge inférieure de 1rem.</p>
+		</div>
+
+		<div class="pb-4">
+			<p>Ceci est un paragraphe avec un rembourrage inférieur de 1.5rem.</p>
+		</div>
+	</section>
+	<section>
+		<h1>Media</h1>
+		<button class="button">Bouton par défaut</button>
+
+		<button class="button button-lg">Bouton Large</button>
+
+		<button class="button button-sm">Bouton Petit</button>
+
+		<button class="button button-outline">Bouton Outline</button>
+	</section>
+	<section>
+		<h1>Forms Validation</h1>
+		<form>
+			<label for="username">Nom d'utilisateur:</label>
+			<input type="text" id="username" class="is-not-validated">
+
+			<!-- Autres champs de formulaire... -->
+
+			<button type="submit">Envoyer</button>
+		</form>
+	</section>
+	<section>
+		<h1>Navigation</h1>
+
+		<nav>
+			<a href="#">Accueil</a>
+			<a href="#">Produits</a>
+			<a href="#">Contact</a>
+		</nav>
+
+	</section>
+	<section>
+		<h1>Icons</h1>
+		<!-- Utilisation de l'icône de bâtiment par défaut -->
+		<span class="icon icon-building"></span>
+
+		<!-- Utilisation de l'icône de bâtiment avec une couleur spécifique -->
+		<span class="icon icon-building blue"></span>
+
+		<!-- Utilisation de l'icône de bâtiment avec une ombre -->
+		<span class="icon icon-building shadow"></span>
+
+		<!-- Utilisation de l'icône par défaut -->
+		<span class="icon">★</span>
+
+		<!-- Utilisation d'une icône spécifique -->
+		<span class="icon icon-arrow"></span>
+
+	</section>
+	<section>
+		<h1>Tables</h1>
+		<table>
+			<thead>
+				<tr>
+					<th>Nom</th>
+					<th>Âge</th>
+					<th>Poste</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>John Doe</td>
+					<td>30</td>
+					<td>Développeur</td>
+				</tr>
+				<tr>
+					<td>Jane Doe</td>
+					<td>28</td>
+					<td>Designer</td>
+				</tr>
+				<!-- Ajoutez d'autres lignes de tableau au besoin -->
+			</tbody>
+		</table>
+
+	</section>
+	<section>
+		<h1>Tooltip</h1>
+		<!-- Utilisation de l'info-bulle -->
+		<div class="tooltip">
+			Hover me
+			<span class="tooltip-text">Info-bulle informative</span>
+		</div>
+
+	</section>
+	<section>
+		<h1>Carrousel</h1>
+		<!-- Utilisation du carrousel d'images -->
+		<!-- Utilisation du carrousel d'images -->
+		<div id="container">
+			<div id="list" style="left: -600px;">
+				<img src="assets/images/betonniere.svg" alt="1" />
+				<img src="assets/images/betonniere.svg" alt="1" />
+				<img src="assets/images/marteau.svg" alt="2" />
+				<img src="assets/images/pinceau.svg" alt="3" />
+				<img src="assets/images/casque.svg" alt="4" />
+				<img src="assets/images/pelle.svg" alt="5" />
+				<img src="assets/images/pelle.svg" alt="5" />
+			</div>
+			<div id="buttons">
+				<span index="1" class="on"></span>
+				<span index="2"></span>
+				<span index="3"></span>
+				<span index="4"></span>
+				<span index="5"></span>
+			</div>
+			<a href="javascript:;" id="prev" class="arrow">&lt;</a>
+			<a href="javascript:;" id="next" class="arrow">&gt;</a>
+		</div>
+	</section>
+	<section>
+		<h1>Formulaire de contact</h1>
+		<form id="contactForm">
+			<label for="name">Nom :</label>
+			<input type="text" id="name" name="name" required>
+
+			<label for="email">Email :</label>
+			<input type="email" id="email" name="email" required>
+
+			<label for="message">Message :</label>
+			<textarea id="message" name="message" rows="4" required></textarea>
+
+			<button type="submit">Envoyer</button>
+		</form>
+	</section>
+	<section class="testimonial-section">
+		<h1>Section Témoignages</h1>
+		<div class="testimonial">
+			<img src="/assets/images/betonniere.svg" alt="Client 1">
+			<h3>Nom du Client 1</h3>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et
+				dolore magna aliqua.</p>
+		</div>
+
+		<div class="testimonial">
+			<img src="/assets/images/casque.svg" alt="Client 2">
+			<h3>Nom du Client 2</h3>
+			<p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+				consequat.</p>
+		</div>
+
+		<div class="testimonial">
+			<img src="/assets/images/marteau.svg" alt="Client 3">
+			<h3>Nom du Client 3</h3>
+			<p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+			</p>
+		</div>
+	</section>
+	<section>
+		<h1>Carte interactive</h1>
+		
+	</section>
+	<section>
+		<h1>Galerie vidéo</h1>
+	</section>
+	<section>
+		<h1>Barre de recherche avancée</h1>
+	</section>
+	<section>
+		<h1>Section FAQ</h1>
+	</section>
+	<section>
+		<h1>Widgets de réseaux sociaux</h1>
+	</section>
+	<section>
+		<h1>Filtres de recherche</h1>
+	</section>
+	<section>
+		<h1>Système de notation et de commentaires</h1>
+	</section>
+	<section>
+		<h1>Section Actualités/Blog</h1>
+	</section>
+	<section>
+		<h1>Calendrier de disponibilité</h1>
+	</section>
+	<section>
+		<h1>Comparateur de produits/services</h1>
+	</section>
+	<section>
+		<h1>Section Équipe</h1>
+	</section>
+	<section>
+		<h1>Barre de progression de projet</h1>
+	</section>
+	<section>
+		<h1>Chat en direct</h1>
+	</section>
+	<section>
+		<h1>Système de notifications</h1>
+	</section>
+	<section>
+		<h1>Système de recommandations personnalisées</h1>
+	</section>
+	<section>
+		<h1>Sélecteur de langue</h1>
+	</section>
+	<section>
+		<h1>Section Portfolio</h1>
+	</section>
+	<section>
+		<h1>Système de devis en ligne</h1>
+	</section>
+	<section>
+		<h1>Tableau de bord personnalisé</h1>
+	</section>
+	<section>
+		<h1>Outil de planification de rendez-vous</h1>
+	</section>
+	<section>
+		<h1>Calculatrice de matériaux</h1>
+	</section>
+	<section>
+		<h1>Widgets météo</h1>
+	</section>
+	<section>
+		<h1>Système de parrainage ou de récompenses</h1>
+	</section>
+	<section>
+		<h1>Section Ressources</h1>
+	</section>
+	<section>
+		<h1>Abonnement à la newsletter</h1>
+	</section>
+	<section>
+		<h1>Section Événements</h1>
+	</section>
+	<section>
+		<h1>Outil de partage de plans ou de dessins</h1>
+	</section>
+
+</body>
+
+</html>

@@ -1,0 +1,30 @@
+// _tables.scss
+
+// Styles généraux pour les tableaux
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1em; // Marge en bas des tableaux (ajustez selon vos besoins)
+  }
+  
+  // Styles pour les en-têtes de tableau
+  th {
+    background-color: #3498db; // Couleur de fond de l'en-tête
+    color: #ffffff; // Couleur du texte de l'en-tête
+    padding: 0.5em; // Rembourrage de l'en-tête
+    text-align: left; // Alignement du texte de l'en-tête
+  }
+  
+  // Styles pour les lignes impaires du tableau
+  tr:nth-child(odd) {
+    background-color: #ecf0f1; // Couleur de fond des lignes impaires
+  }
+  
+  // Styles pour les cellules du tableau
+  td, th {
+    padding: 0.8em; // Rembourrage des cellules
+    border: 1px solid #bdc3c7; // Bordure des cellules
+  }
+  
+  // Ajoutez d'autres styles spécifiques pour les tableaux au besoin
+  

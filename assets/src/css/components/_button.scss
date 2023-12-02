@@ -1,0 +1,61 @@
+.button {
+	// Styles de base
+	display: inline-block;
+	font-family: var(--main-font);
+	font-weight: 600;
+	font-size: rem(16);
+	line-height: rem(18);
+	padding: rem(10) rem(16);
+	border-radius: var(--main-radius);
+	border: none;
+	cursor: pointer;
+	transition: all var(--transition-duration);
+  
+	// Styles liés aux variables
+	color: var(--text-color);
+	background-color: var(--button-bg-color);
+  
+	// Réutilisation des mixins pour la typographie
+	@include font-family($primary-font);
+	@include font-size(16px);
+	@include line-height(1.5);
+	@include font-weight(500);
+	@include text-color(#ffffff);
+  
+	// Modificateurs de couleur
+	&-primary {
+	  --button-bg-color: var(--blue);
+	  --button-bg-hover-color: var(--blue-darker);
+	}
+	&-secondary {
+	  --button-bg-color: var(--grey);
+	  --button-bg-hover-color: var(--grey-darker);
+	}
+	&-danger {
+	  --button-bg-color: var(--red);
+	  --button-bg-hover-color: var(--red-darker);
+	}
+  
+	// Modificateurs de taille
+	&-lg {
+	  padding: rem(16) rem(24);
+	}
+	&-sm {
+	  padding: rem(8) rem(12);
+	}
+  
+	// Modificateur d'outline
+	&-outline {
+	  --button-bg-color: transparent;
+	  --button-hover-bg-color: currentColor;
+	  --button-hover-text-color: var(--white);
+	  border: solid thin currentColor;
+	}
+  
+	// Hover state
+	&:hover {
+	  background-color: var(--button-bg-hover-color);
+	  color: var(--button-hover-text-color);
+	}
+  }
+  

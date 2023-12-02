@@ -1,0 +1,27 @@
+* {
+	box-sizing: border-box;
+}
+
+body {
+	font-family: $font1;
+	//background-color: $grey;
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+}
+a{
+
+	color: var(--blue);
+	text-decoration: none;
+}
+input{
+	&[type="text"],
+	&[type="password"],
+	&[type="number"]{
+		padding: 0.67em 1em;
+		border-radius: var(--main-radius);
+		border: solid thin var(--grey);
+	}
+}

@@ -1,0 +1,39 @@
+// _dropdown.scss
+
+@import '../partials/mixins'; // Assurez-vous que le chemin est correct
+
+// Mixin pour les styles de base du menu déroulant
+@mixin dropdown-base() {
+  position: relative;
+  display: inline-block;
+
+  // Styles pour le bouton déclencheur du menu déroulant
+  .dropdown-trigger {
+    padding: 10px;
+    background-color: #3498db;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+  }
+
+  // Styles pour la liste déroulante elle-même
+  .dropdown-list {
+    display: none;
+    position: absolute;
+    
+    // Utilisation du mixin box-shadow
+    @include box-shadow(0 0 10px rgba(0, 0, 0, 0.1));
+  }
+
+  // Styles pour afficher la liste déroulante lorsqu'elle est activée
+  &.active {
+    .dropdown-list {
+      display: block;
+    }
+  }
+}
+
+// Appliquer le mixin aux éléments .dropdown
+.dropdown {
+  @include dropdown-base();
+}
