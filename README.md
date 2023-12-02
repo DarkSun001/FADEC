@@ -38,3 +38,14 @@ Georges Jonathan NGUEKOUMOU
 
 ## Licence
 Indiquez la licence sous laquelle le projet est distribué.
+
+
+## Commandes Docker
+
+### Mettre en place la base de données
+<code> docker run --name fadec-postgres -e POSTGRES_USER=fadec_user -e POSTGRES_PASSWORD=fadec_mdp -p 5432:5432 -d postgres</code>
+
+### Mettre en place l'application avec le serveur apache
+<code>docker compose build</code>
+
+<code>docker compose up</code>
