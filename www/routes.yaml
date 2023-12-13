@@ -18,3 +18,11 @@
   controller: Security
   action: register
 
+/preview-quote:
+  controller: Devis
+  action: devis_preview
+
+# Gardez votre route actuelle pour la génération du PDF
+/generate-quote-pdf:
+  controller: Devis
+  action: devis_preview
