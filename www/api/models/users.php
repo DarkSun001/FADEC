@@ -66,6 +66,36 @@ class User
         return false;
     }
 
+
+
+    public function login()
+    {
+
+        $query = "SELECT id, email, password FROM cat_user WHERE email = :email";
+        $stmt = $this->conn->prepare($query);
+
+
+        $this->email = htmlspecialchars(strip_tags($this->email));
+        $stmt->bindParam(":email", $this->email);
+
+        $stmt->execute();
+
+        if ($stmt->rowCount() > 0) {
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if (password_verify($this->password, $row['password'])) {
+                $this->id = $row['id'];
+                $this->name = $row['name'];
+
+                return true;
+            } else {
+
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
 }
 
 ?>
