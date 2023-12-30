@@ -12,7 +12,7 @@ class Database
     private $password = "fadec_mdp";
     private $options = [PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC];
 
-    // The constructor is private to prevent initiating the class from outside
+
     private function __construct()
     {
         //var dump password 
@@ -22,7 +22,6 @@ class Database
         $this->conn = new PDO($dataSourceName, $this->userName, $this->password, $this->options);
     }
 
-    // The object is created from within the class itself only if the class has no instance.
     public static function getInstance()
     {
         if (self::$instance == null) {
