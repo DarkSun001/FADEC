@@ -19,7 +19,6 @@ services:
     environment:
       POSTGRES_USER: fadec_user
       POSTGRES_PASSWORD: fadec_mdp
-      POSTGRES_DB: fadec_bdd
     networks:
       - mynetwork
 

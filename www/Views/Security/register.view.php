@@ -1,16 +1,37 @@
-<form method="post">
-    <h2>Inscription</h2>
-    <label for="username">Nom d'utilisateur :</label>
-    <input type="text" id="username" name="username" required>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
-    <label for="email">Adresse e-mail :</label>
-    <input type="email" id="email" name="email" required>
 
-    <label for="password">Mot de passe :</label>
-    <input type="password" id="password" name="password" required>
+<script>
+    // Données JSON à envoyer dans la requête
+    var jsonData = {
+        "id": 12,
+        "email": "adam1@gmail.com",
+        "name": "adam",
+        "password": "adib",
+        "status": 1
+    };
 
-    <label for="confirm_password">Confirmer le mot de passe :</label>
-    <input type="password" id="confirm_password" name="confirm_password" required>
+    console.log(jsonData);
 
-    <button type="submit">S'Inscrire</button>
-</form>
+    // URL de l'API
+    
+    var apiUrl = 'http://localhost:80/api/controllers/users/post.php';
+
+    // Envoi de la requête AJAX avec jQuery
+    $.ajax({
+        url: apiUrl,
+        type: 'POST',
+        data: JSON.stringify(jsonData),
+        contentType: 'application/json',
+        success: function(response) {
+            // La requête a fonctionné
+            console.log(response);
+        },
+        error: function(error) {
+            // La requête n'a pas fonctionné
+            console.log(error);
+        }
+    });
+
+
+</script>

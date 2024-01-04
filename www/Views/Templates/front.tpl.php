@@ -11,7 +11,11 @@
 
 
 <body>
+
+    
     <?php include $this->view;?>
+
+
 <script src="https://cdn.jsdelivr.net/gh/Pyracantharia/CDN-FADEC@master/src/js/main.js" type="module"></script>
 
 
