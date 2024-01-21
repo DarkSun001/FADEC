@@ -2,14 +2,7 @@
 
 
 <script>
-    // Données JSON à envoyer dans la requête
-    var jsonData = {
-        "id": 12,
-        "email": "adam1@gmail.com",
-        "name": "adam",
-        "password": "adib",
-        "status": 1
-    };
+
 
     console.log(jsonData);
 
