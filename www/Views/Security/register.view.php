@@ -2,9 +2,16 @@
 
 
 <script>
+ var registerData = {
+        "id" : "1",
+        "email": "adam1@gmail.com",
+        "password": "adib",
+        "name": "Adam",
+        "status": "1",
 
+    };
 
-    console.log(jsonData);
+    console.log(registerData);
 
     // URL de l'API
     
@@ -14,7 +21,7 @@
     $.ajax({
         url: apiUrl,
         type: 'POST',
-        data: JSON.stringify(jsonData),
+        data: JSON.stringify(registerData),
         contentType: 'application/json',
         success: function(response) {
             // La requête a fonctionné
