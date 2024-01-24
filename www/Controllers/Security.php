@@ -6,7 +6,7 @@ class Security{
 
     public function login(): void
     {
-        new View("Security/login", "front");
+        new View("Security/login", "base");
     }
     public function logout(): void
     {
