@@ -18,3 +18,7 @@
   controller: Security
   action: register
 
+/dashboard:
+  controller: Dash
+  action: dash
+
