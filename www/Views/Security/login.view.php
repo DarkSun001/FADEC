@@ -1,37 +1,39 @@
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<h2>Login</h2>
 
+<form id="loginForm">
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required><br>
 
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required><br>
+
+    <button type="button" onclick="login()">Login</button>
+</form>
+
+<div id="result"></div>
 
 <script>
-    // Données JSON à envoyer dans la requête pour le login
-    var loginData = {
-        "email": "adam1@gmail.com",
-        "password": "adib"
-    };
+    function login() {
+        var email = $('#email').val();
+        var password = $('#password').val();
 
-    console.log(loginData);
-
-    // URL de l'API pour le login (mettez à jour le nom du fichier en fonction de votre backend)
-    var loginApiUrl = 'http://localhost:80/api/controllers/users/get.php';
-
-    
-    // Envoi de la requête AJAX avec jQuery
-
-    $.ajax({
-        url: loginApiUrl,
-        type: 'POST',
-        data: JSON.stringify(loginData),
-        contentType: 'application/json',
-        success: function(response) {
-            // La requête a fonctionné
-            console.log(response);
-            console.log("login success");
-        },
-        error: function(error) {
-            // La requête n'a pas fonctionné
-            console.log(error);
-        }
-    });
-  
- 
+        $.ajax({
+            type: 'GET',
+            url: 'http://localhost:80/api/controllers/users/get.php', // Update with the absolute path
+            data: JSON.stringify({
+                email: email,
+                password: password
+            }),
+            contentType: 'application/json',
+            success: function(response) {
+                $('#result').html('<p>' + response.message + '</p>');
+                if (response.message === 'Login successful') {
+                    // Redirect or perform any action after successful login
+                }
+            },
+            error: function(xhr, status, error) {
+                $('#result').html('<p>Error: ' + xhr.responseText + '</p>');
+            }
+        });
+    }
 </script>

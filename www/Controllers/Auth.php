@@ -16,7 +16,7 @@ class Auth
     public function login()
     {
         $form = new Login();
-        $view = new View("Auth/login", "front");
+        $view = new View("Auth/login", "base");
         $view->assign("formErrors", $form->errors);
         $view->assign("form", $form->getConfig());
         $view->assign("pageTitle", "Connexion - Movie Reviews");
@@ -59,7 +59,7 @@ class Auth
     public function register(): void
     {
         $form = new Register();
-        $view = new View("Auth/register", "front");
+        $view = new View("Auth/register", "base");
         $view->assign("formErrors", $form->errors);
         $view->assign("form", $form->getConfig());
 
