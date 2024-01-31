@@ -14,7 +14,7 @@ class Security{
     }
     public function register(): void
     {
-        new View("Security/register", "front");
+        new View("Security/register", "base");
     }
 
 

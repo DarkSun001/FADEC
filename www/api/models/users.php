@@ -71,7 +71,8 @@ class User
     public function login()
     {
 
-        $query = "SELECT id, email, password FROM cat_user WHERE email = :email";
+        $query = "SELECT id, email, name, password FROM cat_user WHERE email = :email";
+
         $stmt = $this->conn->prepare($query);
 
 
