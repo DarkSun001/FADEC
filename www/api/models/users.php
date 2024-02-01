@@ -85,7 +85,6 @@ class User
 
             if (password_verify($this->password, $row['password'])) {
                 $this->id = $row['id'];
-                $this->name = $row['name'];
 
                 return true;
             } else {
@@ -96,6 +95,17 @@ class User
             return false;
         }
     }
+
+    public function getAllUsers()
+    {
+        $query = "SELECT * FROM cat_user";
+        $stmt = $this->conn->prepare($query);
+
+        $stmt->execute();
+
+        return $stmt;
+    }
+
 }
 
-?>
+

@@ -22,3 +22,6 @@
   controller: Dash
   action: dash
 
+/backoffice:
+  controller: Back
+  action: home

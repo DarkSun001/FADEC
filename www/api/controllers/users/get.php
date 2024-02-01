@@ -10,16 +10,21 @@ try {
     $request = Request::getJsonBody();
 
     $user = new User();
-    $user->email = $request['email'];
-    $user->password = $request['password'];
 
-    if ($user->login()) {
-        Response::json(200, [], ["message" => "Login successful"]);
+    if (isset($request['email']) && isset($request['password'])) {
+        $user->email = $request['email'];
+        $user->password = $request['password'];
+
+        if ($user->login()) {
+            Response::json(200, [], ["message" => "Login successful"]);
+        } else {
+            Response::json(401, [], ["message" => "Invalid credentials"]);
+        }
     } else {
-        Response::json(401, [], ["message" => "Invalid credentials"]);
+        $result = $user->getAllUsers();
+        $users = $result->fetchAll(PDO::FETCH_ASSOC);
+        Response::json(200, [], ["users" => $users]);
     }
 } catch (Exception $e) {
     Response::json(500, [], ["message" => $e->getMessage()]);
 }
-
-?>
