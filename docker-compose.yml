@@ -22,7 +22,7 @@ services:
     networks:
       - mynetwork
 
-  phppgadmin:
+  pgadmin:
     image: dpage/pgadmin4
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@example.com
