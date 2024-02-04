@@ -20,12 +20,11 @@ class User
 
     public function userExists()
     {
-        $query = "SELECT COUNT(*) FROM cat_user WHERE email = :email OR id = :id";
+        $query = "SELECT COUNT(*) FROM cat_user WHERE email = :email";
         $stmt = $this->conn->prepare($query);
 
 
         $stmt->bindParam(":email", $this->email);
-        $stmt->bindParam(":id", $this->id);
         $stmt->execute();
 
         if ($stmt->fetchColumn() > 0) {
@@ -42,24 +41,23 @@ class User
             throw new Exception("User already exists.");
         }
 
-        $query = "INSERT INTO cat_user (id, email, name, password, status) 
-                  VALUES (:id, :email, :name, :password, :status)";
+        $query = "INSERT INTO cat_user (email, name, password, status) 
+                  VALUES (:email, :name, :password, :status)";
 
         $stmt = $this->conn->prepare($query);
 
-        $id = htmlspecialchars(strip_tags($this->id));
         $email = htmlspecialchars(strip_tags($this->email));
         $name = htmlspecialchars(strip_tags($this->name));
         $password = password_hash($this->password, PASSWORD_DEFAULT);
         $status = htmlspecialchars(strip_tags($this->status));
 
-        $stmt->bindParam(":id", $id);
         $stmt->bindParam(":email", $email);
         $stmt->bindParam(":name", $name);
         $stmt->bindParam(":password", $password);
         $stmt->bindParam(":status", $status);
 
         if ($stmt->execute()) {
+            $this->id = $this->conn->lastInsertId();
             return true;
         }
 
@@ -90,7 +88,6 @@ class User
 
                 return true;
             } else {
-
                 return false;
             }
         } else {
@@ -98,5 +95,3 @@ class User
         }
     }
 }
-
-?>

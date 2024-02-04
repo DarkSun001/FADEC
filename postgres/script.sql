@@ -4,13 +4,12 @@
 
 CREATE TABLE IF NOT EXISTS public.cat_user
 (
-    id character(20) COLLATE pg_catalog."default" NOT NULL,
+    id SERIAL PRIMARY KEY, 
     email character varying(255) COLLATE pg_catalog."default",
     name character varying(255) COLLATE pg_catalog."default",
     password character varying(255) COLLATE pg_catalog."default",
-    status integer,
-    CONSTRAINT cat_user_pkey PRIMARY KEY (id)
-)
+    status integer
+);
 
 TABLESPACE pg_default;
 
