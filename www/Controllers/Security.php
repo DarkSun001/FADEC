@@ -17,10 +17,4 @@ class Security{
         new View("Security/register", "base");
     }
 
-    public function PgAdmin(): void
-    {
-        new View("Security/PgAdmin", "base");
-    }
-
-
 }

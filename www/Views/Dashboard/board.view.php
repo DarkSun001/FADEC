@@ -4,6 +4,4 @@
 
 ?>
 
-                <li><a href="../PgAdmin/pg_admin.view.php">Se connecter à PgAdmin</a></li>
-
-
+<li><a href="http://localhost:8080/login">Se connecter à PgAdmin</a></li>
