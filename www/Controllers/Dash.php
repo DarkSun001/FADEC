@@ -6,6 +6,6 @@ class Dash{
 
     public function dash(): void
     {
-        new View("dashboard/board", "front");
+        new View("dashboard/board", "base");
     }
 }
