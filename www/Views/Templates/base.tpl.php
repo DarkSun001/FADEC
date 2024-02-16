@@ -8,11 +8,11 @@
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     </head>
     <body>
-        <?php //include "header.tpl.php";?>
+        <?php include "header.tpl.php";?>
 
         <?php include $this->view;?>
 
-        <?php //include "footer.tpl.php";?>
+        <?php include "footer.tpl.php";?>
 
     </body>
 </html>
