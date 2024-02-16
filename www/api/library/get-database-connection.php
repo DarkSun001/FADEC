@@ -6,7 +6,7 @@ class Database
     private $conn;
 
     private $driver = "pgsql";
-    private $databaseName = "postgres";
+    private $databaseName = "fadec_db";
     private $hostName = "postgres";
     private $userName = "fadec_user";
     private $password = "fadec_mdp";
@@ -16,8 +16,8 @@ class Database
     private function __construct()
     {
         //var dump password 
-        var_dump($this->password);
-        var_dump($this->userName);
+        // var_dump($this->password);
+        // var_dump($this->userName);
         $dataSourceName = "$this->driver:dbname=$this->databaseName;host=$this->hostName;port=5432";
         $this->conn = new PDO($dataSourceName, $this->userName, $this->password, $this->options);
     }
