@@ -6,6 +6,7 @@
             <li><a href="#">Services</a></li>
             <li><a href="#">À propos</a></li>
             <li><a href="#">Contact</a></li>
+            <li><a href="http://localhost:8080/login">Se connecter à PgAdmin</a></li>
         </ul>
     </div>
 </nav>
