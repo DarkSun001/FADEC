@@ -33,16 +33,26 @@ class User
         return false;
     }
 
+    // Fonction pour générer un identifiant aléatoire
+    function generateRandomId()
+    {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomId = '';
+        for ($i = 0; $i < 10; $i++) {
+            $randomId .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomId;
+    }
 
     public function create()
     {
 
-        if ($this->userExists()) {
-            throw new Exception("User already exists.");
-        }
+        // Générer un identifiant aléatoire
+        $this->id = $this->generateRandomId();
 
-        $query = "INSERT INTO cat_user (email, name, password, status) 
-                  VALUES (:email, :name, :password, :status)";
+        $query = "INSERT INTO cat_user (id, email, name, password, status) 
+           VALUES (:id, :email, :name, :password, :status)";
 
         $stmt = $this->conn->prepare($query);
 
@@ -51,20 +61,20 @@ class User
         $password = password_hash($this->password, PASSWORD_DEFAULT);
         $status = htmlspecialchars(strip_tags($this->status));
 
+        $stmt->bindParam(":id", $this->id);
         $stmt->bindParam(":email", $email);
         $stmt->bindParam(":name", $name);
         $stmt->bindParam(":password", $password);
         $stmt->bindParam(":status", $status);
 
         if ($stmt->execute()) {
-            $this->id = $this->conn->lastInsertId();
             return true;
         }
 
         return false;
     }
 
-
+    
 
     public function login()
     {
