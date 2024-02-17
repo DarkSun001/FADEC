@@ -20,8 +20,9 @@ class User
 
     public function userExists()
     {
-        $query = "SELECT COUNT(*) FROM cat_user WHERE email = :email OR id = :id";
-        $stmt->bindParam(":id", $this->id);
+        //OR id = :id
+        $query = "SELECT COUNT(*) FROM cat_user WHERE email = :email ";
+        // $stmt->bindParam(":id", $this->id);
         $stmt = $this->conn->prepare($query);
 
 
