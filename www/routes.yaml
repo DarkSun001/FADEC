@@ -30,6 +30,10 @@
 /dashboard:
   controller: Dash
   action: dash
+  
+/calculatrice_materiaux:
+  controller: Materiaux
+  action: calculatrice
 
 /backoffice:
   controller: Back

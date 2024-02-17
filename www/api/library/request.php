@@ -37,4 +37,13 @@ class Request
 
         return $headers[$name];
     }
+
+    public static function getRequest()
+    {
+      
+        $rawData = file_get_contents("php://input");
+        $requestData = json_decode($rawData, true);
+
+        return $requestData;
+    }
 }
