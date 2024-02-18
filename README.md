@@ -1,5 +1,5 @@
 # FADEC
-#### Framework de l'Artisanats Du Bâtiment et des Entreprises de Construction
+#### Framework de l'Artisanats du Bâtiment et des Entreprises de Construction
 FADEC est une collecttion d'outils qui aide les artisants du batîment à créer leur propre site vitrine avec plusieurs services.
 
 ## Description du Projet
