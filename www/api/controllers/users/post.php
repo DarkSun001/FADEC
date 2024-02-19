@@ -7,14 +7,12 @@ require __DIR__ . "/../../library/json-response.php";
 try {
     $request = Request::getJsonBody();
 
-
     if (!$request) {
         throw new Exception("Invalid JSON input");
     }
 
-
     $user = new User();
-    $user->id = $request["id"];
+    // $user->id = $request["id"];
     $user->email = $request["email"];
     $user->name = $request["name"];
     $user->password = $request["password"];

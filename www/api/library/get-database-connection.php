@@ -6,7 +6,7 @@ class Database
     private $conn;
 
     private $driver = "pgsql";
-    private $databaseName = "postgres";
+    private $databaseName = "fadec_db";
     private $hostName = "postgres";
     private $userName = "fadec_user";
     private $password = "fadec_mdp";

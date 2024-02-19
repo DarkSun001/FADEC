@@ -1,0 +1,17 @@
+{
+    "name": "esgi/fadec",
+    "require": {
+        "vlucas/phpdotenv": "^5.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "Esgi\\Fadec\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "deathfal",
+            "email": "56265997+deathfal@users.noreply.github.com"
+        }
+    ]
+}

@@ -1,10 +1,8 @@
 <?php
 
-
 require __DIR__ . "/../../library/request.php";
 require __DIR__ . "/../../models/users.php";
 require __DIR__ . "/../../library/json-response.php";
-
 
 try {
     $request = Request::getJsonBody();
