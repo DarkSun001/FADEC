@@ -20,8 +20,9 @@ try {
     $user->password = $request["password"];
     $user->status = $request["status"];
 
+
     if ($user->create()) {
-        Response::json(201, [], ["message" => "User created"]);
+        Response::json(201, [], ["message" => "User created", "user" => $user]);
     } else {
         Response::json(500, [], ["message" => "User not created"]);
     }

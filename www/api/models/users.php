@@ -54,7 +54,7 @@ class User
         $email = htmlspecialchars(strip_tags($this->email));
         $name = htmlspecialchars(strip_tags($this->name));
         $password = password_hash($this->password, PASSWORD_DEFAULT);
-        $status = htmlspecialchars(strip_tags($this->status));
+        $status = trim(htmlspecialchars(strip_tags($this->status)));
 
         $stmt->bindParam(":id", $this->id);
         $stmt->bindParam(":email", $email);
@@ -69,7 +69,7 @@ class User
         return false;
     }
 
-    
+
 
     public function login()
     {
@@ -108,4 +108,22 @@ class User
 
         return $stmt;
     }
+
+
+    public function delete()
+    {
+        $query = "DELETE FROM cat_user WHERE id = :id";
+        $stmt = $this->conn->prepare($query);
+
+        $stmt->bindParam(":id", $this->id);
+
+        if ($stmt->execute()) {
+            return true;
+        }
+
+        return false;
+    }
+
 }
+
+
