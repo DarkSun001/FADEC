@@ -1,11 +1,12 @@
 <?php
 
 require_once __DIR__ . '/../library/get-database-connection.php';
+require_once __DIR__ . '/../library/functions/genId.php';
 
 class User
 {
     private $conn;
-
+    private $genId;
     public $id;
     public $email;
     public $name;
@@ -15,6 +16,7 @@ class User
     public function __construct()
     {
         $this->conn = Database::getInstance()->getConnection();
+        $this->genId = new GenId();
     }
 
 
@@ -35,18 +37,6 @@ class User
         return false;
     }
 
-    // Fonction pour générer un identifiant aléatoire
-    function generateRandomId()
-    {
-        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $charactersLength = strlen($characters);
-        $randomId = '';
-        for ($i = 0; $i < 10; $i++) {
-            $randomId .= $characters[rand(0, $charactersLength - 1)];
-        }
-        return $randomId;
-    }
-
     public function create()
     {
         if ($this->userExists()) {
@@ -54,7 +44,7 @@ class User
         }
 
         // Générer un identifiant aléatoire
-        $this->id = $this->generateRandomId();
+        $this->id = $this->genId->generateRandomId();
 
         $query = "INSERT INTO cat_user (id, email, name, password, status) 
            VALUES (:id, :email, :name, :password, :status)";
