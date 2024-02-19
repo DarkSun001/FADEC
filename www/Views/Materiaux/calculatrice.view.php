@@ -1,14 +1,8 @@
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-
-<!-- je veux afficher les prix des matériaux dans cette page -->
-
-
-
 <div id="resultats"></div>
 
 <script>
     // URL de l'API pour récupérer les prix des matériaux
-    var apiUrl = 'http://localhost:80/api/controllers/materiaux/getMateriaux.php';
+    var apiUrl = 'http://localhost:80/api/controllers/materiaux/get.php';
 
     // Envoi de la requête AJAX avec jQuery
     $.ajax({

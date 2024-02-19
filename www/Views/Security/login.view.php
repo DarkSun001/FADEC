@@ -14,12 +14,10 @@
         <button type="button" id="loginButton" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Se connecter</button>
     </div>
 
-    <!-- Ajoutez une div pour afficher le message -->
     <div id="messageContainer"></div>
 
 </form>
 
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
 // Attendez que le DOM soit chargé
 $(document).ready(function () {

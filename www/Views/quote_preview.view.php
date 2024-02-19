@@ -8,12 +8,10 @@
     <title>Prévisualisation du Devis</title>
 </head>
 <body>
-    <!-- Affichage du contenu du PDF -->
     <div>
         <?php echo $pdfContent; ?>
     </div>
 
-    <!-- Lien pour télécharger le devis au format PDF -->
     <a href="/generate-quote-pdf" target="_blank">Télécharger le devis au format PDF</a>
 </body>
 </html>

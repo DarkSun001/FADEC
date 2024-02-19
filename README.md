@@ -34,13 +34,10 @@ PERROUAS THIBAULT
 
 Christopher MBARAPA-SOKAMBI
 
-Georges Jonathan NGUEKOUMOU
-
 Adam Garchi
 
 ## Licence
-Indiquez la licence sous laquelle le projet est distribué.
-
+Pour l'instant pas de licence
 
 ## Commandes Docker
 
