@@ -48,3 +48,5 @@ Pour l'instant pas de licence
 <code>docker compose build</code>
 
 <code>docker compose up</code>
+
+<code>docker exec -it ID_CONTAINER bash </code>

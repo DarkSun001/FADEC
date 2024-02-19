@@ -1,3 +1,16 @@
+<?php
+
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../..');
+$dotenv->load();
+
+if ($_SERVER['SERVER_NAME'] === 'localhost') {
+    $baseUrl = $_ENV['LOCALHOST_URL'];
+} else {
+    $baseUrl = $_ENV['PROD_URL'];
+}
+
+?>
+
 <form id="loginForm">
 
     <div class="mb-4">
@@ -19,51 +32,51 @@
 </form>
 
 <script>
-// Attendez que le DOM soit chargé
-$(document).ready(function () {
-    // Ajoutez un gestionnaire d'événements au clic du bouton de connexion
-    $("#loginButton").click(function () {
-        // Récupérez les données du formulaire
-        var email = $("#email").val();
-        var password = $("#password").val();
+    // Attendez que le DOM soit chargé
+    $(document).ready(function() {
+        // Ajoutez un gestionnaire d'événements au clic du bouton de connexion
+        $("#loginButton").click(function() {
+            // Récupérez les données du formulaire
+            var email = $("#email").val();
+            var password = $("#password").val();
 
-        // Créez l'objet de données pour la requête AJAX
-        var loginData = {
-            "email": email,
-            "password": password
-        };
+            // Créez l'objet de données pour la requête AJAX
+            var loginData = {
+                "email": email,
+                "password": password
+            };
 
-        // URL de l'API
-        var apiUrl = 'http://localhost:80/api/controllers/users/get.php';
+            var baseUrl = '<?= $baseUrl ?>';
+            var apiUrl = baseUrl + "users/get.php";
 
-        // Envoi de la requête AJAX avec jQuery
-        $.ajax({
-            url: apiUrl,
-            type: 'POST',
-            data: JSON.stringify(loginData),
-            contentType: 'application/json',
-            success: function (response) {
-                // La requête a fonctionné
-                console.log(response.message);  // Afficher le message de retour
-                
-                // Afficher le message dans la div messageContainer
-                $("#messageContainer").html('<div class="text-green-600">' + response.message + '</div>');
-            },
-            error: function (error) {
-                // La requête n'a pas fonctionné
-                if (error.responseJSON) {
-                    console.log(error.responseJSON.message);  // Afficher le message d'erreur du serveur
-                    
-                    // Afficher le message d'erreur dans la div messageContainer
-                    $("#messageContainer").html('<div class="text-red-600">' + error.responseJSON.message + '</div>');
-                } else {
-                    console.log("Erreur inattendue:", error.responseText);
-                    
-                    // Afficher une erreur inattendue dans la div messageContainer
-                    $("#messageContainer").html('<div class="text-red-600">Erreur inattendue: ' + error.responseText + '</div>');
+            // Envoi de la requête AJAX avec jQuery
+            $.ajax({
+                url: apiUrl,
+                type: 'POST',
+                data: JSON.stringify(loginData),
+                contentType: 'application/json',
+                success: function(response) {
+                    // La requête a fonctionné
+                    console.log(response.message); // Afficher le message de retour
+
+                    // Afficher le message dans la div messageContainer
+                    $("#messageContainer").html('<div class="text-green-600">' + response.message + '</div>');
+                },
+                error: function(error) {
+                    // La requête n'a pas fonctionné
+                    if (error.responseJSON) {
+                        console.log(error.responseJSON.message); // Afficher le message d'erreur du serveur
+
+                        // Afficher le message d'erreur dans la div messageContainer
+                        $("#messageContainer").html('<div class="text-red-600">' + error.responseJSON.message + '</div>');
+                    } else {
+                        console.log("Erreur inattendue:", error.responseText);
+
+                        // Afficher une erreur inattendue dans la div messageContainer
+                        $("#messageContainer").html('<div class="text-red-600">Erreur inattendue: ' + error.responseText + '</div>');
+                    }
                 }
-            }
+            });
         });
     });
-});
 </script>

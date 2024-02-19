@@ -1,3 +1,16 @@
+<?php
+
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../..');
+$dotenv->load();
+
+if ($_SERVER['SERVER_NAME'] === 'localhost') {
+    $baseUrl = $_ENV['LOCALHOST_URL'];
+} else {
+    $baseUrl = $_ENV['PROD_URL'];
+}
+
+?>
+
 <form id="registerForm">
 
     <h2 class="text-2xl font-bold mb-4">Inscription</h2>
@@ -17,7 +30,6 @@
         <input type="password" name="password" id="password" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Votre mot de passe" required>
     </div>
 
-
     <div>
         <label for="status" class="block text-gray-700 text-sm font-bold mb-2">Status</label>
         <select name="status" id="status" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" required>
@@ -25,7 +37,6 @@
             <option value="0">0 à definir</option>
         </select>
     </div>
-
 
     <div class="mb-4">
         <button type="button" id="registerButton" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">S'inscrire</button>
@@ -53,8 +64,8 @@
                 "status": status
             };
 
-            // URL de l'API
-            var apiUrl = 'http://localhost:80/api/controllers/users/post.php';
+            var baseUrl = '<?= $baseUrl ?>';
+            var apiUrl = baseUrl + "users/post.php";
 
             // Envoi de la requête AJAX avec jQuery
             $.ajax({
@@ -68,7 +79,7 @@
                     // Afficher le message de retour
                     $("#registerMessageContainer").html('<div class="text-green-600">' + response.message + '</div>');
                 },
-                error: function(error) { 
+                error: function(error) {
                     // La requête n'a pas fonctionné
                     if (error.responseJSON) {
                         console.log(error.responseJSON.message); // Afficher le message d'erreur du serveur
