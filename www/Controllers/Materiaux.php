@@ -7,10 +7,6 @@ class Materiaux{
 
     public function Calculatrice(): void
     {
-
-        
-
-
         new View("Materiaux/calculatrice", "base");
     }
 

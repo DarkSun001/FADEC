@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Core\SQL;
+
 class User extends SQL
 {
     private Int $id = 0;
@@ -16,7 +17,8 @@ class User extends SQL
     protected ?String $date_inserted;
     protected ?String $date_updated;
 
-    public function __construct(){
+    public function __construct()
+    {
         parent::__construct();
     }
 
@@ -199,7 +201,4 @@ class User extends SQL
 
         return false;
     }
-
-
-
 }

@@ -1,7 +1,5 @@
 <?php
 
-
-
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../..');
 $dotenv->load();
 
@@ -15,21 +13,18 @@ if ($_SERVER['SERVER_NAME'] === 'localhost') {
 
 
 <script>
-        var baseUrl = '<?= $baseUrl ?>';
-
+    var baseUrl = '<?= $baseUrl ?>';
     var url = baseUrl + "users/get.php";
-
 
     function getAllUser(data, callback) {
         var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function () {
+        xhttp.onreadystatechange = function() {
             if (this.readyState == 4) {
                 if (this.status == 200) {
                     if (typeof callback === 'function') {
                         callback(this.responseText);
                     }
                     var responseData = JSON.parse(this.responseText);
-
 
                     var users = responseData.users;
 
@@ -55,7 +50,7 @@ if ($_SERVER['SERVER_NAME'] === 'localhost') {
             return;
         }
 
-        users.forEach(function (user) {
+        users.forEach(function(user) {
             var row = document.createElement('tr');
             row.innerHTML = '<td>' + user.id + '</td>' +
                 '<td>' + user.name + '</td>' +
@@ -68,16 +63,12 @@ if ($_SERVER['SERVER_NAME'] === 'localhost') {
             tableBody.appendChild(row);
         });
     }
-
-
 </script>
 <script>
-
-    getAllUser(null, function (response) {
+    getAllUser(null, function(response) {
         console.log(response);
     });
 </script>
-
 
 <table id="userTable">
     <thead>
