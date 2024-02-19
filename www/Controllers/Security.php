@@ -6,7 +6,7 @@ class Security{
 
     public function login(): void
     {
-        new View("Security/login", "back");
+        new View("Security/login", "base");
     }
     public function logout(): void
     {
@@ -14,7 +14,7 @@ class Security{
     }
     public function register(): void
     {
-        echo "Register";
+        new View("Security/register", "base");
     }
 
 

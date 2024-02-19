@@ -1,11 +1,13 @@
 <?php
 namespace App\Controllers;
 
+use App\Core\View;
+
 class Main{
 
     public function home(): void
     {
-        echo "Page d'accueil";
+        new View("Home/home", "base");
     }
 
     public function aboutUs(): void

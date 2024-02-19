@@ -17,9 +17,11 @@ services:
   postgres:
     image: postgres
     environment:
+      POSTGRES_DB: fadec_db
       POSTGRES_USER: fadec_user
       POSTGRES_PASSWORD: fadec_mdp
-      POSTGRES_DB: fadec_bdd
+    volumes:
+      - ./postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - mynetwork
 
@@ -33,8 +35,8 @@ services:
     depends_on:
       - postgres
     networks:
-      - mynetwork
-
+      - mynetwork    
+      
 networks:
   mynetwork:
     driver: bridge
