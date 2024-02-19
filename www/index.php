@@ -2,6 +2,10 @@
 
 namespace App;
 
+use Dotenv\Dotenv;
+
+require "vendor/autoload.php";
+
 /*
     Si nous sommes sur l'url /login alors il faut instancier
     la class (controller) Security et appeler la method (Action) login
