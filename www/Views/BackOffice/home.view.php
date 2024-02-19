@@ -1,8 +1,23 @@
+<?php
+
+
+
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../..');
+$dotenv->load();
+
+if ($_SERVER['SERVER_NAME'] === 'localhost') {
+    $baseUrl = $_ENV['LOCALHOST_URL'];
+} else {
+    $baseUrl = $_ENV['PROD_URL'];
+}
+
+?>
+
+
 <script>
-    var baseUrl = "http://localhost:80/api/controllers/"
+        var baseUrl = '<?= $baseUrl ?>';
 
     var url = baseUrl + "users/get.php";
-
 
 
     function getAllUser(data, callback) {
