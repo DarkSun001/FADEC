@@ -41,7 +41,7 @@ if ($_SERVER['SERVER_NAME'] === 'localhost') {
     <div class="mb-4">
         <button type="button" id="registerButton" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">S'inscrire</button>
     </div>
-
+    
     <div id="registerMessageContainer"></div>
 </form>
 

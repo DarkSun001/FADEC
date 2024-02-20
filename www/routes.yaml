@@ -41,3 +41,11 @@
 /submit_devis:
   controller: Devis
   action: submitDevis
+
+/forgot_password:
+  controller: Password
+  action: forgot
+
+/reset_password:
+  controller: Password
+  action: reset
