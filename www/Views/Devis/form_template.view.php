@@ -42,6 +42,7 @@
             <button id="clear"><span> Clear </span></button>
         </div>
     </div>
+    
     <input type="submit" value="Envoyer le devis">
 </form>
 
