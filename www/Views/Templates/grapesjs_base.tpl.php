@@ -9,10 +9,17 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/signature_pad/1.3.4/signature_pad.js"></script>
         <script src="../js/functions.js"></script>
         <script src="/js/functions.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/grapesjs/0.12.17/grapes.min.js">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/grapesjs/0.12.17/css/grapes.min.css">
+        <link rel="stylesheet" href="../css/grapesjs.css">
+        <script src="../js/grapesjs.js"></script>
+        
+
     </head>
 
 <body>
     <?php include "header.tpl.php"; ?>
+    
 
     <?php include $this->view; ?>
 

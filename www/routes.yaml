@@ -45,3 +45,7 @@
 /mail:
   controller: Mail
   action: sendMail
+
+/page_builder:
+  controller: PageBuilder
+  action: showPageBuilder
