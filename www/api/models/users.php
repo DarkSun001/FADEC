@@ -19,22 +19,24 @@ class User
         $this->genId = new GenId();
     }
 
-
     public function userExists()
     {
-        //OR id = :id
-        $query = "SELECT COUNT(*) FROM cat_user WHERE email = :email ";
-        // $stmt->bindParam(":id", $this->id);
+        // Check if either email or ID matches
+        $query = "SELECT COUNT(*) FROM cat_user WHERE email = :email OR id = :id";
         $stmt = $this->conn->prepare($query);
-
-
+    
+        // Bind parameters
         $stmt->bindParam(":email", $this->email);
+        $stmt->bindParam(":id", $this->id);
+    
+        // Execute the query
         $stmt->execute();
-
+    
+        // Check if any rows are returned
         if ($stmt->fetchColumn() > 0) {
-            return true;
+            return true; // User exists
         }
-        return false;
+        return false; // User does not exist
     }
 
     public function create()
@@ -121,6 +123,47 @@ class User
             return true;
         }
 
+        return false;
+    }
+
+    public function update()
+    {
+        // Build the SQL query dynamically based on provided fields
+        $query = "UPDATE cat_user SET";
+        $params = [];
+    
+        // Check if name is provided and not empty
+        if (!empty($this->name)) {
+            $query .= " name = :name,";
+            $params['name'] = $this->name;
+        }
+    
+        // Check if status is provided
+        if (isset($this->status)) {
+            $query .= " status = :status,";
+            $params['status'] = $this->status;
+        }
+    
+        // Remove the trailing comma if any
+        $query = rtrim($query, ',');
+    
+        // Add WHERE clause for user ID
+        $query .= " WHERE id = :id";
+    
+        // Prepare the query
+        $stmt = $this->conn->prepare($query);
+    
+        // Bind parameters
+        $stmt->bindParam(":id", $this->id);
+        foreach ($params as $param => &$value) {
+            $stmt->bindParam(":$param", $value);
+        }
+    
+        // Execute the query
+        if ($stmt->execute()) {
+            return true;
+        }
+    
         return false;
     }
 
