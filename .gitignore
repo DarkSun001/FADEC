@@ -1,3 +1,3 @@
 /vendor
 /www/vendor
-.env
+/www/.env
