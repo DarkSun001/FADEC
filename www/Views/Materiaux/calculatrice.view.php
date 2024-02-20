@@ -1,14 +1,21 @@
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<?php
 
-<!-- je veux afficher les prix des matériaux dans cette page -->
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../..');
+$dotenv->load();
 
+if ($_SERVER['SERVER_NAME'] === 'localhost') {
+    $baseUrl = $_ENV['LOCALHOST_URL'];
+} else {
+    $baseUrl = $_ENV['PROD_URL'];
+}
 
+?>
 
 <div id="resultats"></div>
 
 <script>
-    // URL de l'API pour récupérer les prix des matériaux
-    var apiUrl = 'http://localhost:80/api/controllers/materiaux/getMateriaux.php';
+    var baseUrl = '<?= $baseUrl ?>';
+    var apiUrl = baseUrl + "materiaux/get.php";
 
     // Envoi de la requête AJAX avec jQuery
     $.ajax({
@@ -16,7 +23,7 @@
         type: 'GET',
         dataType: 'json',
         success: function(response) {
-       
+
             // Affichez les résultats dans la page
             var resultats = document.getElementById('resultats');
             resultats.innerHTML = '<h2>Prix des matériaux</h2>';

@@ -1,2 +1,1 @@
-
-<h1> home.view.php</h1>
+<h1> Accueil</h1>
