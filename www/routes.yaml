@@ -49,3 +49,7 @@
 /reset_password:
   controller: Password
   action: reset
+
+/mail:
+  controller: Mail
+  action: sendMail
