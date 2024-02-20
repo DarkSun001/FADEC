@@ -31,6 +31,7 @@ if ($_SERVER['SERVER_NAME'] === 'localhost') {
             <th>Name</th>
             <th>Email</th>
             <th>Status</th>
+            <th>Password</th>
             <th>Action</th>
         </tr>
     </thead>
