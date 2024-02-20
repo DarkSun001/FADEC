@@ -6,6 +6,7 @@
             <li><a href="#">Services</a></li>
             <li><a href="#">À propos</a></li>
             <li><a href="#">Contact</a></li>
+            <li><a href="formulaire_devis">Devis</a></li>
             <ul class="navbar-nav">
                 <li> <a href="login">Connexion</a></li>
                 <li> <a href="register">Inscription</a></li>

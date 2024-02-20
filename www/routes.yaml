@@ -18,15 +18,6 @@
   controller: Security
   action: register
 
-
-/preview-quote:
-  controller: Devis
-  action: devis_preview
-
-/generate-quote-pdf:
-  controller: Devis
-  action: devis_preview
-
 /dashboard:
   controller: Dash
   action: dash
@@ -38,3 +29,15 @@
 /backoffice:
   controller: Back
   action: home
+
+/generate_devis_pdf:
+  controller: Devis
+  action: generatePDF
+
+/formulaire_devis:
+  controller: Devis
+  action: showForm
+
+/submit_devis:
+  controller: Devis
+  action: submitDevis
