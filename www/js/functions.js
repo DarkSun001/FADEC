@@ -156,7 +156,6 @@ function deleteUser(id) {
     xhttp.send(data);
 }
 
-//createNewUser()
 
 function createNewUser() {
     var url = baseUrl + "/users/post.php";

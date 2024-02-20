@@ -8,6 +8,8 @@
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/signature_pad/1.3.4/signature_pad.js"></script>
         <script src="../js/functions.js"></script>
+        <script src="/js/functions.js"></script>
+
     </head>
 
 <body>

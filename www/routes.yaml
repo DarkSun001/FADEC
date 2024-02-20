@@ -41,3 +41,7 @@
 /submit_devis:
   controller: Devis
   action: submitDevis
+
+/mail:
+  controller: Mail
+  action: sendMail
