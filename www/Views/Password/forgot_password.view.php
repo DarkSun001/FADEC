@@ -1,63 +1,78 @@
+<?php
 
-    <h2>Mot de passe oublié</h2>
-    <form id="forgotPasswordForm" action="reset_password.php" method="POST">
-    <div>
-        <label for="email">Adresse e-mail :</label><br>
-        <input type="email" id="email" name="email" required>
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../..');
+$dotenv->load();
+
+if ($_SERVER['SERVER_NAME'] === 'localhost') {
+    $baseUrl = $_ENV['LOCALHOST_URL'];
+} else {
+    $baseUrl = $_ENV['PROD_URL'];
+}
+
+?>
+
+<form id="sendMailForm">
+    <label>Mot de passe oublié</label>
+
+    <div class="mb-4">
+        <label for="recipient" class="block text-gray-700 text-sm font-bold mb-2">Destinataire</label>
+        <input type="email" name="recipient" id="recipient" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Adresse e-mail du destinataire" required>
     </div>
-    <div>
-        <button type="submit">Envoyer</button>
+
+    <div class="mb-4">
+        <button type="button" id="sendMailButton" onclick="sendMail()" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Envoyer l'e-mail</button>
     </div>
+
+    <div id="sendMailMessageContainer"></div>
 </form>
-    
-    <div id="messageContainer"></div>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('#forgotPasswordForm').submit(function(event) {
-                event.preventDefault();
-                
-                var email = $("#email").val();
+<script>
+    var baseUrl = '<?= $baseUrl ?>';
 
-                // Créer l'objet de données pour la requête AJAX
-                var resetData = {
-                    "email": email
-                };
+    var mailApiUrl = baseUrl + "mail/post.php";
 
-                var baseUrl = location.hostname === "localhost" ? "http://localhost:80/api/controllers" : "http://141.94.203.225/api/controllers";
-                var apiUrl = baseUrl;
+    function sendMail() {
+        // Récupérer les données du formulaire
+        var recipient = document.getElementById('recipient').value;
 
-                // Envoi de la requête AJAX avec jQuery
-                $.ajax({
-                    url: apiUrl,
-                    type: 'POST',
-                    data: JSON.stringify(resetData),
-                    contentType: 'application/json',
-                    success: function(response) {
+        var subject = "Réinitialisation de mot de passe";
+        var message = "Bonjour,\n\nPour réinitialiser votre mot de passe, veuillez cliquer sur le lien suivant :  ";
+
+        // Créer l'objet de données pour la requête AJAX
+        var mailData = {
+            "recipient": recipient,
+            "subject": subject,
+            "message": message
+        };
+        console.log(mailData);
+
+        // Envoi de la requête AJAX avec JavaScript pur
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', mailApiUrl, true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4) {
+                try {
+                    if (xhr.status === 200) {
                         // La requête a fonctionné
-                        console.log(response.message); // Afficher le message de retour
-
-                        // Afficher le message dans la div messageContainer
-                        $("#messageContainer").html('<div class="text-green-600">' + response.message + '</div>');
-                    },
-                    error: function(error) {
+                        var response = JSON.parse(xhr.responseText);
+                        console.log(response);
+                        // Afficher le message de retour
+                        document.getElementById('sendMailMessageContainer').innerHTML = '<div class="text-green-600">' + response.message + '</div>';
+                    } else {
                         // La requête n'a pas fonctionné
-                        if (error.responseJSON) {
-                            console.log(error.responseJSON.message); // Afficher le message d'erreur du serveur
-
-                            // Afficher le message d'erreur dans la div messageContainer
-                            $("#messageContainer").html('<div class="text-red-600">' + error.responseJSON.message + '</div>');
-                        } else {
-                            console.log("Erreur inattendue:", error.responseText);
-
-                            // Afficher une erreur inattendue dans la div messageContainer
-                            $("#messageContainer").html('<div class="text-red-600">Erreur inattendue: ' + error.responseText + '</div>');
-                        }
+                        var errorResponse = JSON.parse(xhr.responseText);
+                        console.log(errorResponse.message);
+                        document.getElementById('sendMailMessageContainer').innerHTML = '<div class="text-red-600">' + errorResponse.message + '</div>';
                     }
-                });
-            });
-        });
-    </script>
-</body>
-</html>
+                } catch (error) {
+                    // Gestion des erreurs lors de l'analyse JSON
+                    console.error("Erreur lors de l'analyse JSON:", error);
+                    document.getElementById('sendMailMessageContainer').innerHTML = '<div class="text-red-600">Erreur lors de la réception de la réponse du serveur.</div>';
+                }
+            }
+        };
+
+        xhr.send(JSON.stringify(mailData));
+    }
+</script>
