@@ -56,7 +56,7 @@ class Mail
             $mail->Port       = $mailPort;
 
             // Paramètres de l'e-mail
-            $mail->setFrom('crusher94500@gmail.com', 'Crusher');
+            $mail->setFrom('JuleMarcAntoine4589@gmail.com', 'FADEC');
             $mail->addAddress($this->recipient);
             $mail->isHTML(true);
             $mail->Subject = $this->subject;
