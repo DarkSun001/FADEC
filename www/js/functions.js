@@ -40,19 +40,83 @@ function updateTable(users) {
     
 
     users.forEach(function (user) {
-        console.log(user);
         var row = document.createElement('tr');
         row.innerHTML = '<td>' + user.id + '</td>' +
-            '<td>' + user.name + '</td>' +
+            '<td><input type="text" class="edit-name" value="' + user.name + '"></td>' +
             '<td>' + user.email + '</td>' +
-            '<td>' + user.status + '</td>' +
+            '<td><input type="number" min="0" max="3"class="edit-status" value="' + user.status + '"></td>' +
             '<td>' +
-            '<a>Edit</a>' +
-            '<a onclick="deleteUser(\'' + user.id + '\')">Delete</a>' +
+            '<button class="save-btn" style="display:none">Save</button>' +
+            '<button class="delete-btn" onclick="deleteUser(\'' + user.id + '\')">Delete</button>' +
             '</td>';
         tableBody.appendChild(row);
+
+        // Add event listeners for input fields
+        var editInputs = row.querySelectorAll('.edit-name, .edit-status');
+        editInputs.forEach(function(input) {
+            input.addEventListener('input', function() {
+                var saveBtn = row.querySelector('.save-btn');
+                saveBtn.style.display = 'inline-block';
+            });
+        });
+        
+        // Add event listener for save button
+        var saveBtn = row.querySelector('.save-btn');
+        saveBtn.addEventListener('click', function() {
+            updateUser(row, user.id);
+        });
     });
 }
+
+
+function toggleEditMode(row, editMode) {
+    var editInputs = row.querySelectorAll('input.edit-name, input.edit-status');
+    var saveBtn = row.querySelector('.save-btn');
+    
+    editInputs.forEach(function(input) {
+        input.readOnly = !editMode;
+    });
+
+    if (editMode) {
+        saveBtn.style.display = 'none';
+    } else {
+        saveBtn.style.display = 'inline-block';
+    }
+}
+
+function updateUser(row, userId) {
+    var name = row.querySelector('.edit-name').value;
+    var status = row.querySelector('.edit-status').value;
+
+    // Perform the update operation (send an AJAX request)
+    var url = baseUrl + "/users/update.php";
+    var data = JSON.stringify({ id: userId, name: name, status: status });
+    //if status is not between 0 and 3 included stop function and alert 
+    if (status < 0 || status > 3) {
+        alert("Status must be between 0 and 3 included");
+        return;
+    }
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("PATCH", url, true);
+    xhttp.setRequestHeader("Content-Type", "application/json");
+
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4) {
+            if (this.status == 200) {
+                console.log("Update Successful");
+                // Hide the "Save" button after successful update
+                var saveBtn = row.querySelector('.save-btn');
+                saveBtn.style.display = 'none';
+                getAllUser();
+            } else {
+                console.error("Error: " + this.status);
+            }
+        }
+    };
+
+    xhttp.send(data);
+}
+
 function deleteUser(id) {
     var url = baseUrl + "/users/delete.php";
     var data = JSON.stringify({ id: id });
