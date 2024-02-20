@@ -10,6 +10,7 @@ if ($_SERVER['SERVER_NAME'] === 'localhost') {
 }
 
 ?>
+
 <form id="sendMailForm">
 
     <h2 class="text-2xl font-bold mb-4">Envoyer un e-mail</h2>
@@ -30,7 +31,7 @@ if ($_SERVER['SERVER_NAME'] === 'localhost') {
     </div>
 
     <div class="mb-4">
-        <button type="button" id="sendMailButton" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Envoyer l'e-mail</button>
+        <button type="button" id="sendMailButton" onclick="sendMail()" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Envoyer l'e-mail</button>
     </div>
 
     <div id="sendMailMessageContainer"></div>
@@ -38,48 +39,50 @@ if ($_SERVER['SERVER_NAME'] === 'localhost') {
 
 <script>
     var baseUrl = '<?= $baseUrl ?>';
-    var mailApiUrl = baseUrl + "mail/post.php";
+    
+var mailApiUrl = baseUrl + "mail/post.php";
+    function sendMail() {
+    // Récupérer les données du formulaire
+    var recipient = document.getElementById('recipient').value;
+    var subject = document.getElementById('subject').value;
+    var message = document.getElementById('message').value;
 
+    // Créer l'objet de données pour la requête AJAX
+    var mailData = {
+        "recipient": recipient,
+        "subject": subject,
+        "message": message
+    };
+    console.log(mailData);
 
-    $(document).ready(function() {
-        $("#sendMailButton").click(function() {
-            // Récupérer les données du formulaire
-            var recipient = $("#recipient").val();
-            var subject = $("#subject").val();
-            var message = $("#message").val();
-
-            // Créer l'objet de données pour la requête AJAX
-            var mailData = {
-                "recipient": recipient,
-                "subject": subject,
-                "message": message
-            };
-
-
-
-            // Envoi de la requête AJAX avec jQuery
-            $.ajax({
-                url: mailApiUrl,
-                type: 'POST',
-                data: JSON.stringify(mailData),
-                contentType: 'application/json',
-                success: function(response) {
+    // Envoi de la requête AJAX avec JavaScript pur
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', mailApiUrl, true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+            try {
+                if (xhr.status === 200) {
                     // La requête a fonctionné
+                    var response = JSON.parse(xhr.responseText);
                     console.log(response);
                     // Afficher le message de retour
-                    $("#sendMailMessageContainer").html('<div class="text-green-600">' + response.message + '</div>');
-                },
-                error: function(error) {
+                    document.getElementById('sendMailMessageContainer').innerHTML = '<div class="text-green-600">' + response.message + '</div>';
+                } else {
                     // La requête n'a pas fonctionné
-                    if (error.responseJSON) {
-                        console.log(error.responseJSON.message);
-                        $("#sendMailMessageContainer").html('<div class="text-red-600">' + error.responseJSON.message + '</div>');
-                    } else {
-                        console.log("Erreur inattendue:", error.responseText);
-                        $("#sendMailMessageContainer").html('<div class="text-red-600">Erreur inattendue: ' + error.responseText + '</div>');
-                    }
+                    var errorResponse = JSON.parse(xhr.responseText);
+                    console.log(errorResponse.message);
+                    document.getElementById('sendMailMessageContainer').innerHTML = '<div class="text-red-600">' + errorResponse.message + '</div>';
                 }
-            });
-        });
-    });
+            } catch (error) {
+                // Gestion des erreurs lors de l'analyse JSON
+                console.error("Erreur lors de l'analyse JSON:", error);
+                document.getElementById('sendMailMessageContainer').innerHTML = '<div class="text-red-600">Erreur lors de la réception de la réponse du serveur.</div>';
+            }
+        }
+    };
+
+    xhr.send(JSON.stringify(mailData));
+}
+
 </script>

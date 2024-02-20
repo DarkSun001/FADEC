@@ -64,22 +64,7 @@ class Mail
 
             // Envoyer l'e-mail
             if ($mail->send()) {
-                // Générer un identifiant aléatoire
-                $this->id = $this->genId->generateRandomId();
-
-                // Enregistrez les détails de l'e-mail envoyé dans la base de données si nécessaire
-                $query = "INSERT INTO mail (id, recipient, subject, message) 
-                    VALUES (:id, :recipient, :subject, :message)";
-
-                $stmt = $this->conn->prepare($query);
-
-                $stmt->bindParam(":id", $this->id);
-                $stmt->bindParam(":recipient", $this->recipient);
-                $stmt->bindParam(":subject", $this->subject);
-                $stmt->bindParam(":message", $this->message);
-
-                $stmt->execute();
-
+               
                 return true;
             } else {
                 return false;

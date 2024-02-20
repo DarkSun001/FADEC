@@ -80,3 +80,50 @@ function deleteUser(id) {
 
     xhttp.send(data);
 }
+
+
+// var mailApiUrl = baseUrl + "mail/post.php";
+
+// function sendMail() {
+//     // Récupérer les données du formulaire
+//     var recipient = document.getElementById('recipient').value;
+//     var subject = document.getElementById('subject').value;
+//     var message = document.getElementById('message').value;
+
+//     // Créer l'objet de données pour la requête AJAX
+//     var mailData = {
+//         "recipient": recipient,
+//         "subject": subject,
+//         "message": message
+//     };
+//     console.log(mailData);
+
+//     // Envoi de la requête AJAX avec JavaScript pur
+//     var xhr = new XMLHttpRequest();
+//     xhr.open('POST', mailApiUrl, true);
+//     xhr.setRequestHeader('Content-Type', 'application/json');
+//     xhr.onreadystatechange = function() {
+//         if (xhr.readyState === 4) {
+//             try {
+//                 if (xhr.status === 200) {
+//                     // La requête a fonctionné
+//                     var response = JSON.parse(xhr.responseText);
+//                     console.log(response);
+//                     // Afficher le message de retour
+//                     document.getElementById('sendMailMessageContainer').innerHTML = '<div class="text-green-600">' + response.message + '</div>';
+//                 } else {
+//                     // La requête n'a pas fonctionné
+//                     var errorResponse = JSON.parse(xhr.responseText);
+//                     console.log(errorResponse.message);
+//                     document.getElementById('sendMailMessageContainer').innerHTML = '<div class="text-red-600">' + errorResponse.message + '</div>';
+//                 }
+//             } catch (error) {
+//                 // Gestion des erreurs lors de l'analyse JSON
+//                 console.error("Erreur lors de l'analyse JSON:", error);
+//                 document.getElementById('sendMailMessageContainer').innerHTML = '<div class="text-red-600">Erreur lors de la réception de la réponse du serveur.</div>';
+//             }
+//         }
+//     };
+
+//     xhr.send(JSON.stringify(mailData));
+// }
