@@ -5,9 +5,15 @@ $dotenv->load();
 
 if ($_SERVER['SERVER_NAME'] === 'localhost') {
     $baseUrl = $_ENV['LOCALHOST_URL'];
+    $baseUrlClean = $_ENV['LOCALHOST_URL2'];
 } else {
     $baseUrl = $_ENV['PROD_URL'];
+    $baseUrlClean = $_ENV['PROD_URL2'];
 }
+
+
+
+
 
 ?>
 
@@ -28,15 +34,18 @@ if ($_SERVER['SERVER_NAME'] === 'localhost') {
 
 <script>
     var baseUrl = '<?= $baseUrl ?>';
+    var baseUrlClean = '<?= $baseUrlClean ?>';
 
     var mailApiUrl = baseUrl + "mail/post.php";
+
+    var mailbaseUrlClean = baseUrlClean + "reset_password";
 
     function sendMail() {
         // Récupérer les données du formulaire
         var recipient = document.getElementById('recipient').value;
 
         var subject = "Réinitialisation de mot de passe";
-        var message = "Bonjour,\n\nPour réinitialiser votre mot de passe, veuillez cliquer sur le lien suivant :  ";
+        var message = "Bonjour,\n\nPour réinitialiser votre mot de passe, veuillez cliquer sur le lien suivant : " + mailbaseUrlClean ;
 
         // Créer l'objet de données pour la requête AJAX
         var mailData = {
