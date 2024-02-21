@@ -53,3 +53,7 @@
 /mail:
   controller: Mail
   action: sendMail
+
+/fake_token:
+  controller: Fake
+  action: fakeToken

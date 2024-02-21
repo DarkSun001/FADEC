@@ -10,11 +10,6 @@ if ($_SERVER['SERVER_NAME'] === 'localhost') {
     $baseUrl = $_ENV['PROD_URL'];
     $baseUrlClean = $_ENV['PROD_URL2'];
 }
-
-
-
-
-
 ?>
 
 <form id="sendMailForm">
@@ -33,6 +28,12 @@ if ($_SERVER['SERVER_NAME'] === 'localhost') {
 </form>
 
 <script>
+    <?php function generateResetToken()
+    {
+        return bin2hex(random_bytes(16)); // Génère un jeton aléatoire de 16 octets et le convertit en une chaîne hexadécimale
+    }
+    ?>
+    var token = "<?= generateResetToken() ?>";
     var baseUrl = '<?= $baseUrl ?>';
     var baseUrlClean = '<?= $baseUrlClean ?>';
 
@@ -45,7 +46,7 @@ if ($_SERVER['SERVER_NAME'] === 'localhost') {
         var recipient = document.getElementById('recipient').value;
 
         var subject = "Réinitialisation de mot de passe";
-        var message = "Bonjour,\n\nPour réinitialiser votre mot de passe, veuillez cliquer sur le lien suivant : " + mailbaseUrlClean ;
+        var message = "Bonjour,\n\nPour réinitialiser votre mot de passe, veuillez cliquer sur le lien suivant : " + mailbaseUrlClean + "?token=" + token;
 
         // Créer l'objet de données pour la requête AJAX
         var mailData = {
@@ -67,6 +68,8 @@ if ($_SERVER['SERVER_NAME'] === 'localhost') {
                         var response = JSON.parse(xhr.responseText);
                         console.log(response);
                         // Afficher le message de retour
+                        console.log("creation du token");
+                        createToken();
                         document.getElementById('sendMailMessageContainer').innerHTML = '<div class="text-green-600">' + response.message + '</div>';
                     } else {
                         // La requête n'a pas fonctionné
@@ -83,5 +86,35 @@ if ($_SERVER['SERVER_NAME'] === 'localhost') {
         };
 
         xhr.send(JSON.stringify(mailData));
+    }
+
+    var baseUrl = '<?= $baseUrl ?>';
+
+    var mailApiUrl = baseUrl + "users/post_token.php";
+
+
+    function createToken() {
+        // Créer l'URL vers le script PHP post_token.php
+        var tokenApiUrl = baseUrl + "users/post_token.php";
+        console.log(tokenApiUrl);
+
+        // Envoi de la requête AJAX avec JavaScript pur
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", tokenApiUrl, true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 201) {
+                    // La requête a réussi
+                    console.log("Token créé avec succès.");
+                } else {
+                    // La requête a échoué
+                    console.error("Erreur lors de la création du token.");
+                }
+            }
+        };
+
+        // Envoyer la requête avec des données vides, car aucune donnée n'est nécessaire pour la création du token
+        xhr.send(JSON.stringify({}));
     }
 </script>

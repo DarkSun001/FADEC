@@ -1,38 +1,39 @@
 <?php
 
-// Inclure la configuration de l'environnement
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../..');
-$dotenv->load();
+require __DIR__ . "/../../library/request.php";
+require __DIR__ . "/../../models/users.php";
+require __DIR__ . "/../../library/json-response.php";
 
-// Vérifier si l'e-mail a été soumis
-if (isset($_POST['email'])) {
-    $email = $_POST['email'];
+try {
+    $request = Request::getJsonBody();
 
-    // Générer un jeton de réinitialisation (vous pouvez utiliser une bibliothèque pour cela)
-    $resetToken = generateResetToken();
-
-    // Envoyer l'e-mail de réinitialisation avec le lien contenant le jeton
-    $resetLink = "http://example.com/reset_password_form.php?token=$resetToken";
-    $emailContent = "Bonjour,\n\nPour réinitialiser votre mot de passe, veuillez cliquer sur le lien suivant :\n$resetLink";
-    $subject = "Réinitialisation de mot de passe";
-    $headers = "From: " . $_ENV['EMAIL_FROM']; // Utiliser l'adresse e-mail configurée dans le fichier .env
-
-    if (mail($email, $subject, $emailContent, $headers)) {
-        // L'e-mail a été envoyé avec succès
-        echo json_encode(array("message" => "Un e-mail de réinitialisation a été envoyé à votre adresse e-mail."));
-    } else {
-        // Erreur lors de l'envoi de l'e-mail
-        http_response_code(500);
-        echo json_encode(array("message" => "Erreur lors de l'envoi de l'e-mail. Veuillez réessayer plus tard."));
+    if (!$request) {
+        throw new Exception("Invalid JSON input");
     }
-} else {
-    // Si l'e-mail n'a pas été soumis, renvoyer une erreur
-    http_response_code(400);
-    echo json_encode(array("message" => "Adresse e-mail manquante."));
-}
 
-// Fonction pour générer un jeton de réinitialisation (exemple)
-function generateResetToken() {
-    return bin2hex(random_bytes(16)); // Génère un jeton aléatoire de 16 octets et le convertit en une chaîne hexadécimale
+    // Check if the required fields are present in the request
+    $requiredFields = ['id', 'password']; // Ajoutez 'password' comme champ requis
+    foreach ($requiredFields as $field) {
+        if (!isset($request[$field])) {
+            throw new Exception("Missing required field: $field");
+        }
+    }
+
+    $user = new User();
+    $user->id = $request["id"];
+
+    // Check if the password field is provided
+    if (isset($request['password'])) {
+        // Vous devez effectuer des validations supplémentaires sur le mot de passe si nécessaire
+        $user->password = password_hash($request['password'], PASSWORD_DEFAULT);
+    }
+
+    // Perform the update operation
+    if ($user->updatePassword()) { // Vous devez implémenter une méthode 'updatePassword' dans votre modèle User
+        Response::json(200, [], ["message" => "Password updated successfully"]);
+    } else {
+        Response::json(500, [], ["message" => "Failed to update password"]);
+    }
+} catch (Exception $e) {
+    Response::json(500, [], ["message" => $e->getMessage()]);
 }
-?>
