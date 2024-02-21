@@ -167,6 +167,39 @@ class User
         return false;
     }
 
+    public function forgotPassword($email)
+    {
+        $query = "SELECT id FROM cat_user WHERE email = :email";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(":email", $email);
+        $stmt->execute();
+    
+        if ($stmt->rowCount() > 0) {
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            $userId = $row['id'];
+    
+            // Générer un nouveau mot de passe
+            $newPassword = $this->genId->generateRandomId(); // Remplacez cette fonction par votre propre méthode pour générer un mot de passe aléatoire
+            
+            // Mettre à jour le mot de passe de l'utilisateur dans la base de données
+            $updateQuery = "UPDATE cat_user SET password = :password WHERE id = :id";
+            $updateStmt = $this->conn->prepare($updateQuery);
+            $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+            $updateStmt->bindParam(":password", $hashedPassword);
+            $updateStmt->bindParam(":id", $userId);
+            $updateStmt->execute();
+    
+            // Envoyer le nouveau mot de passe à l'utilisateur (par exemple, par e-mail)
+    
+            return true;
+
+            // Remplacez cette fonction par votre propre méthode pour envoyer un e-mail
+        }
+    
+        return false;
+    }
+    
+
 }
 
 

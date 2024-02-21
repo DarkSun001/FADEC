@@ -42,6 +42,18 @@
   controller: Devis
   action: submitDevis
 
+/forgot_password:
+  controller: Password
+  action: forgot
+
+/reset_password:
+  controller: Password
+  action: reset
+
 /mail:
   controller: Mail
   action: sendMail
+
+/fake_token:
+  controller: Fake
+  action: fakeToken

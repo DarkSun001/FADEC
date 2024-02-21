@@ -14,5 +14,13 @@ CREATE TABLE cat_materiaux (
     prix_kilo DECIMAL(10, 2)
 ); -- This semicolon was missing
 
+-- token
+CREATE TABLE cat_token (
+    id text COLLATE pg_catalog."default" NOT NULL,
+    token character varying(255),
+    user_id TEXT,
+    created_at TIMESTAMP
+); -- This semicolon was missing
+
 
 INSERT INTO cat_materiaux (id, nom, prix_kilo) VALUES (1, 'Fer', 1.5);

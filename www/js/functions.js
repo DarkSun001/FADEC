@@ -198,3 +198,25 @@ function createNewUser() {
 
     xhttp.send(data);
 }
+
+function forgotPassword(email) {
+    var baseUrl = location.hostname === "localhost" ? "http://localhost:80/api/controllers" : "http://141.94.203.225/api/controllers";
+    var url = baseUrl + "/users/ForgotPassword.php";
+    var data = JSON.stringify({ email: email });
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", url, true);
+    xhttp.setRequestHeader("Content-Type", "application/json");
+
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4) {
+            if (this.status == 200) {
+                alert("Un e-mail de réinitialisation de mot de passe a été envoyé à votre adresse e-mail.");
+            } else {
+                alert("Une erreur est survenue lors de la réinitialisation de votre mot de passe. Veuillez réessayer plus tard.");
+            }
+        }
+    };
+
+    xhttp.send(data);
+}

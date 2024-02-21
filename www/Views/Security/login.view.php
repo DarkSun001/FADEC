@@ -11,6 +11,8 @@ if ($_SERVER['SERVER_NAME'] === 'localhost') {
 
 ?>
 
+
+
 <form id="loginForm">
 
     <div class="mb-4">
@@ -25,6 +27,10 @@ if ($_SERVER['SERVER_NAME'] === 'localhost') {
 
     <div class="mb-4">
         <button type="button" id="loginButton" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Se connecter</button>
+    </div>
+
+    <div class="mb-4">
+        <button type="button" id="forgotPassword" onclick="window.location.href = 'forgot_password'" class="flex w-full justify-center rounded-md bg-gray-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Mot de passe oublié ?</button>
     </div>
 
     <div id="messageContainer"></div>
