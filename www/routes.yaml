@@ -57,3 +57,7 @@
 /fake_token:
   controller: Fake
   action: fakeToken
+
+/setup:
+  controller: Setup
+  action: setupDb
