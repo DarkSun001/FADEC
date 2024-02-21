@@ -14,6 +14,12 @@ if ($_SERVER['SERVER_NAME'] === 'localhost') {
     var baseUrl = '<?= $baseUrl ?>';
     var apiUrl = baseUrl + "users/get.php";
 
+    // Vérifier si la page actuelle est déjà "register"
+    var isRegisterPage = window.location.href.includes("register");
+
+    // Vérifier si la redirection a déjà été effectuée
+    var redirectionDone = false;
+
     // Envoi de la requête AJAX avec jQuery
     $.ajax({
         url: apiUrl,
@@ -24,9 +30,12 @@ if ($_SERVER['SERVER_NAME'] === 'localhost') {
             console.log(response);
 
             // Vérifier si aucun utilisateur avec le statut 3 n'est retourné
-            if (!(response.users && response.users.length > 0 && response.users[0].status === 3)) {
-                // Aucun utilisateur avec le statut 3, rediriger vers la page "register"
-                window.location.href = "register";
+            if (!(response.users && response.users.length > 0 && response.users[0].status === 3 && )) {
+                // Aucun utilisateur avec le statut 3, rediriger vers la page "register" seulement si ce n'est pas déjà la page "register"
+                if (!isRegisterPage && !redirectionDone) {
+                    window.location.href = baseUrl + 'register';
+                    redirectionDone = true; // Marquer que la redirection a été effectuée
+                }
                 return; // Arrêter l'exécution ici pour éviter d'afficher le message
             }
 
