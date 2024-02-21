@@ -10,7 +10,7 @@ class Security{
     }
     public function logout(): void
     {
-        echo "Logout";
+        new View("Home/home", "base");
     }
     public function register(): void
     {

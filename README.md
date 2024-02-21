@@ -34,13 +34,10 @@ PERROUAS THIBAULT
 
 Christopher MBARAPA-SOKAMBI
 
-Georges Jonathan NGUEKOUMOU
-
 Adam Garchi
 
 ## Licence
-Indiquez la licence sous laquelle le projet est distribué.
-
+Pour l'instant pas de licence
 
 ## Commandes Docker
 
@@ -51,3 +48,5 @@ Indiquez la licence sous laquelle le projet est distribué.
 <code>docker compose build</code>
 
 <code>docker compose up</code>
+
+<code>docker exec -it ID_CONTAINER bash </code>

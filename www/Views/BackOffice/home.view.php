@@ -1,7 +1,5 @@
 <?php
 
-
-
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../..');
 $dotenv->load();
 
@@ -20,10 +18,11 @@ if ($_SERVER['SERVER_NAME'] === 'localhost') {
     console.log(url);
 
     getAllUser(null, function (response) {
+
+
         console.log(response);
     }, url);
 </script>
-
 
 <table id="userTable">
     <thead>
@@ -32,6 +31,7 @@ if ($_SERVER['SERVER_NAME'] === 'localhost') {
             <th>Name</th>
             <th>Email</th>
             <th>Status</th>
+            <th>Password</th>
             <th>Action</th>
         </tr>
     </thead>

@@ -2,6 +2,9 @@
 
 require_once __DIR__ . '/../library/get-database-connection.php';
 require_once __DIR__ . '/../library/functions/genId.php';
+require_once __DIR__ . '/../../vendor/autoload.php';
+
+use Firebase\JWT\JWT;
 
 class User
 {
@@ -12,6 +15,7 @@ class User
     public $name;
     public $password;
     public $status;
+    public $jwtToken;
 
     public function __construct()
     {
@@ -19,56 +23,63 @@ class User
         $this->genId = new GenId();
     }
 
-
     public function userExists()
     {
-        //OR id = :id
-        $query = "SELECT COUNT(*) FROM cat_user WHERE email = :email ";
-        // $stmt->bindParam(":id", $this->id);
+        $query = "SELECT COUNT(*) FROM cat_user WHERE email = :email OR id = :id";
         $stmt = $this->conn->prepare($query);
-
-
+        
         $stmt->bindParam(":email", $this->email);
+        $stmt->bindParam(":id", $this->id);
+        
         $stmt->execute();
-
         if ($stmt->fetchColumn() > 0) {
             return true;
         }
+        
         return false;
+        
+        
     }
 
     public function create()
     {
+
+
+     
+       
+        $this->id = $this->genId->generateRandomId();
         if ($this->userExists()) {
             throw new Exception("User already exists.");
         }
+    
+        $this->status = 0;
+  
 
-        // Générer un identifiant aléatoire
-        $this->id = $this->genId->generateRandomId();
-
-        $query = "INSERT INTO cat_user (id, email, name, password, status) 
-           VALUES (:id, :email, :name, :password, :status)";
-
+      
+    
+        $hashedPassword = password_hash($this->password, PASSWORD_DEFAULT);
+    
+        $query = "INSERT INTO cat_user (id, email, name, password, status, jwt_token) 
+                  VALUES (:id, :email, :name, :password, :status, :jwt_token)";
+    
         $stmt = $this->conn->prepare($query);
-
-        $email = htmlspecialchars(strip_tags($this->email));
-        $name = htmlspecialchars(strip_tags($this->name));
-        $password = password_hash($this->password, PASSWORD_DEFAULT);
-        $status = trim(htmlspecialchars(strip_tags($this->status)));
-
+    
         $stmt->bindParam(":id", $this->id);
-        $stmt->bindParam(":email", $email);
-        $stmt->bindParam(":name", $name);
-        $stmt->bindParam(":password", $password);
-        $stmt->bindParam(":status", $status);
+        $stmt->bindParam(":email", $this->email);
+        $stmt->bindParam(":name", $this->name);
+        $stmt->bindParam(":password", $hashedPassword);
+        $stmt->bindParam(":status", $this->status);
+        
 
+        $jwtToken = $this->generateJwtToken();
+        $stmt->bindParam(":jwt_token", $jwtToken);
+    
         if ($stmt->execute()) {
-            return true;
+            return $jwtToken;
         }
-
+    
         return false;
     }
-
 
 
     public function login()
@@ -101,6 +112,7 @@ class User
 
     public function getAllUsers()
     {
+    
         $query = "SELECT * FROM cat_user";
         $stmt = $this->conn->prepare($query);
 
@@ -123,6 +135,105 @@ class User
 
         return false;
     }
+
+    public function update()
+    {
+        // Build the SQL query dynamically based on provided fields
+        $query = "UPDATE cat_user SET";
+        $params = [];
+    
+        // Check if name is provided and not empty
+        if (!empty($this->name)) {
+            $query .= " name = :name,";
+            $params['name'] = $this->name;
+        }
+    
+        // Check if status is provided
+        if (isset($this->status)) {
+            $query .= " status = :status,";
+            $params['status'] = $this->status;
+        }
+    
+        // Remove the trailing comma if any
+        $query = rtrim($query, ',');
+    
+        // Add WHERE clause for user ID
+        $query .= " WHERE id = :id";
+    
+        // Prepare the query
+        $stmt = $this->conn->prepare($query);
+    
+        // Bind parameters
+        $stmt->bindParam(":id", $this->id);
+        foreach ($params as $param => &$value) {
+            $stmt->bindParam(":$param", $value);
+        }
+    
+        // Execute the query
+        if ($stmt->execute()) {
+            return true;
+        }
+    
+        return false;
+    }
+
+
+    public function forgotPassword($email)
+    {
+        $query = "SELECT id FROM cat_user WHERE email = :email";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(":email", $email);
+        $stmt->execute();
+    
+        if ($stmt->rowCount() > 0) {
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            $userId = $row['id'];
+    
+            
+            $newPassword = $this->genId->generateRandomId(); 
+            
+            
+            $updateQuery = "UPDATE cat_user SET password = :password WHERE id = :id";
+            $updateStmt = $this->conn->prepare($updateQuery);
+            $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+            $updateStmt->bindParam(":password", $hashedPassword);
+            $updateStmt->bindParam(":id", $userId);
+            $updateStmt->execute();
+    
+           
+    
+            return true;
+
+            
+        }
+    
+        return false;
+    }
+    
+
+
+    public function generateJwtToken()
+    {
+     
+        $secretKey = "4d4m1t0l3Sp3c1@lM3gaS3cr3tK3y";
+
+        $payload = array(
+            "id" => $this->id,
+            "email" => $this->email,
+            "name" => $this->name,
+            "status" => $this->status,
+            "exp" => time() + 60 * 60 * 24 
+        );
+
+        $algorithm = 'HS256';
+
+        // Generate JWT token
+        $token = JWT::encode($payload, $secretKey, $algorithm);
+
+
+        return $token;
+    }
+
 
 }
 
