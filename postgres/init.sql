@@ -5,6 +5,7 @@ CREATE TABLE IF NOT EXISTS public.cat_user
     name character varying(255) COLLATE pg_catalog."default",
     password character varying(255) COLLATE pg_catalog."default",
     status integer,
+    jwt_token text COLLATE pg_catalog."default",
     CONSTRAINT cat_user_pkey PRIMARY KEY (id)
 ); -- This semicolon was missing
 
