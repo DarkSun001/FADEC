@@ -7,6 +7,10 @@ class Back
 {
     public function home(): void
     {
+        
+
+
+
         new View("BackOffice/home", "base");
     }
 }

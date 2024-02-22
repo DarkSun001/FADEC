@@ -14,6 +14,11 @@ if(isset($_COOKIE['jwt_token'])){
     $id = $decoded->id;
 
 }
+
+//header("Location: /404");
+//exit();
+
+
 ?>
 
 <script>
@@ -39,8 +44,10 @@ function disconnect () {
         if (this.readyState == 4) {
             if (this.status == 200) {
                 console.log("Logout Successful");
+                console.log("Redirecting to " + clearUrl);
                 window.location.href = clearUrl;
             } else {
+                console.log("Redirecting to " + clearUrl);
                 window.location.href = clearUrl;
                 console.error("Error: " + this.status);
             }
@@ -62,15 +69,10 @@ function disconnect () {
             <li><a href="#">Contact</a></li>
             <li><a href="formulaire_devis">Devis</a></li>
             <?php if(isset($decoded)): ?>
-                <?php
-                $nameStyle = ''; // Default style
-                $adminLabel = ''; // Default admin label
-                if(isset($decoded->status) && $decoded->status == 3) {
-                    $nameStyle = 'color: red;'; // Set name color to red
-                    $adminLabel = ' (admin)'; // Append admin label
-                }
-                ?>
-                <li><span style="<?php echo $nameStyle; ?>">Bonjour <?php echo $decoded->name . $adminLabel; ?></span></li>
+                <li><span <?php if($decoded->status == 3) echo 'style="color: red;"'; ?>>Bonjour <?php echo $decoded->name; ?><?php if($decoded->status == 3) echo ' (admin)'; ?></span></li>
+                <?php if($decoded->status == 3): ?>
+                    <li><a href="/backoffice">Backoffice</a></li>
+                <?php endif; ?>
                 <li><a onclick="disconnect()">Déconnexion</a></li>
             <?php else: ?>
                 <ul class="navbar-nav">
