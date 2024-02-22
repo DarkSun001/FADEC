@@ -102,4 +102,15 @@ if ($_SERVER['SERVER_NAME'] === 'localhost') {
             });
         });
     });
+
+    var inputs = document.querySelectorAll('input');
+    inputs.forEach(function(input) {
+        input.addEventListener('keypress', function(event) {
+            var char = String.fromCharCode(event.which);
+            var regex = /[A-Za-z0-9@.]/;
+            if (!regex.test(char)) {
+                window.location.href = "/"; // Redirect to homepage
+            }
+        });
+    });
 </script>
