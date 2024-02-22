@@ -16,7 +16,10 @@ try {
         if ($user->login()) {
             //send message login success + token 
             Response::json(200, [], ["message" => "Login successful", "jwt_token" => $user->jwtToken]);
-        } else {
+        }else if ($user->status == 0) {
+            Response::json(401, [], ["message" => "Account not activated"]);
+        } 
+        else {
             Response::json(401, [], ["message" => "Invalid credentials"]);
         }
     } else {

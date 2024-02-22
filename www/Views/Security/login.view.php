@@ -64,9 +64,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 if (xhr.status === 200 || xhr.status === 201) {
                     var response = JSON.parse(xhr.responseText);
                     document.getElementById("messageContainer").innerHTML = '<div class="text-green-600">' + response.message + '</div>';
-                    //check if token is not null
                     if (response.jwt_token) {
-                        //store token in a cookie
                         document.cookie = "jwt_token=" + response.jwt_token;
                         console.log(baseUrl)
                         window.location.href = clearUrl;

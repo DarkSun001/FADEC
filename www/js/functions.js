@@ -1,5 +1,7 @@
 
 var baseUrl = location.hostname === "localhost" ? "http://localhost:80/api/controllers" : "http://141.94.203.225/api/controllers";
+var clearUrl = location.hostname === "localhost" ? "http://localhost:80/" : "http://141.94.203.225/";
+
 
 
 function getAllUser(data, callback) {
@@ -220,3 +222,6 @@ function forgotPassword(email) {
 
     xhttp.send(data);
 }
+
+
+
