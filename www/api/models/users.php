@@ -120,7 +120,7 @@ class User
                 $this->jwtToken = $this->generateJwtToken();
                 
                 $this->insertNewToken($this->id, $this->jwtToken);
-                return true;
+                return $this->jwtToken;
             } else {
                 return false;
             }

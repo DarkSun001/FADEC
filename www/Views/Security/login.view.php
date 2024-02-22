@@ -9,6 +9,10 @@ if ($_SERVER['SERVER_NAME'] === 'localhost') {
     $baseUrl = $_ENV['PROD_URL'];
 }
 
+$clearUrl = str_replace('api/controllers/', '', $baseUrl);
+
+
+
 ?>
 
 
@@ -38,51 +42,48 @@ if ($_SERVER['SERVER_NAME'] === 'localhost') {
 </form>
 
 <script>
-    // Attendez que le DOM soit chargé
-    $(document).ready(function() {
-        // Ajoutez un gestionnaire d'événements au clic du bouton de connexion
-        $("#loginButton").click(function() {
-            // Récupérez les données du formulaire
-            var email = $("#email").val();
-            var password = $("#password").val();
+document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById("loginButton").addEventListener("click", function() {
+        var email = document.getElementById("email").value;
+        var password = document.getElementById("password").value;
 
-            // Créez l'objet de données pour la requête AJAX
-            var loginData = {
-                "email": email,
-                "password": password
-            };
+        var loginData = {
+            "email": email,
+            "password": password
+        };
 
-            var baseUrl = '<?= $baseUrl ?>';
-            var apiUrl = baseUrl + "users/get.php";
+        var baseUrl = '<?= $baseUrl ?>';
+        var clearUrl = '<?= $clearUrl ?>';
+        var apiUrl = baseUrl + "users/get.php";
 
-            // Envoi de la requête AJAX avec jQuery
-            $.ajax({
-                url: apiUrl,
-                type: 'POST',
-                data: JSON.stringify(loginData),
-                contentType: 'application/json',
-                success: function(response) {
-                    // La requête a fonctionné
-                    console.log(response.message); // Afficher le message de retour
-
-                    // Afficher le message dans la div messageContainer
-                    $("#messageContainer").html('<div class="text-green-600">' + response.message + '</div>');
-                },
-                error: function(error) {
-                    // La requête n'a pas fonctionné
-                    if (error.responseJSON) {
-                        console.log(error.responseJSON.message); // Afficher le message d'erreur du serveur
-
-                        // Afficher le message d'erreur dans la div messageContainer
-                        $("#messageContainer").html('<div class="text-red-600">' + error.responseJSON.message + '</div>');
-                    } else {
-                        console.log("Erreur inattendue:", error.responseText);
-
-                        // Afficher une erreur inattendue dans la div messageContainer
-                        $("#messageContainer").html('<div class="text-red-600">Erreur inattendue: ' + error.responseText + '</div>');
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", apiUrl, true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200 || xhr.status === 201) {
+                    var response = JSON.parse(xhr.responseText);
+                    document.getElementById("messageContainer").innerHTML = '<div class="text-green-600">' + response.message + '</div>';
+                    //check if token is not null
+                    if (response.jwt_token) {
+                        //store token in a cookie
+                        document.cookie = "jwt_token=" + response.jwt_token;
+                        console.log(baseUrl)
+                        window.location.href = clearUrl;
                     }
+                } else {
+                    var errorMessage = "Erreur inattendue";
+                    if (xhr.response) {
+                        var errorResponse = JSON.parse(xhr.responseText);
+                        errorMessage = errorResponse.message || "Erreur inattendue";
+                    }
+                    console.error(errorMessage);
+                    document.getElementById("messageContainer").innerHTML = '<div class="text-red-600">' + errorMessage + '</div>';
                 }
-            });
-        });
+            }
+        };
+        xhr.send(JSON.stringify(loginData));
     });
+});
+
 </script>
